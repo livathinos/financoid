@@ -1,12 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    >
-<TextView  
-    android:layout_width="fill_parent" 
-    android:layout_height="wrap_content" 
-    android:text="@string/hello"
-    />
-</LinearLayout>
+<ScrollView
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/ScrollView01"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:scrollbars="vertical">
+	
+	<LinearLayout
+		android:layout_width="fill_parent"
+		android:orientation="vertical"
+		android:layout_height="fill_parent">
+		
+		<TextView  
+		    android:id="@+id/TextViewTitle"  
+		    android:layout_width="wrap_content"  
+		    android:layout_height="wrap_content"  
+		    android:text="@string/feedbacktitle"  
+		    android:textSize="10pt"
+		/>
+		
+		<EditText  
+		    android:id="@+id/EditTextName"  
+		    android:layout_height="wrap_content"  
+		    android:hint="@string/feedbackname"  
+		    android:inputType="textPersonName"  
+		    android:layout_width="fill_parent"
+		/>  
+		
+		<EditText  
+		    android:id="@+id/EditTextEmail"  
+		    android:layout_height="wrap_content"  
+		    android:hint="@string/feedbackemail"  
+		    android:inputType="textEmailAddress"  
+		    android:layout_width="fill_parent"
+		/>
+		
+		<Spinner  
+		    android:id="@+id/SpinnerFeedbackType"  
+		    android:layout_height="wrap_content"  
+		    android:prompt="@string/feedbacktype"  
+		    android:layout_width="fill_parent"  
+		    android:entries="@array/feedbacktypelist"  
+		/>
+		
+		<EditText
+			android:id="@+id/EditTextFeedbackBody"
+			android:layout_height="wrap_content"
+			android:hint="@string/feedbackbody"
+			android:inputType="textMultiLine"
+			android:lines="5"
+			android:layout_width="fill_parent"
+		 />
+		 
+		 <CheckBox
+		 	android:id="@+id/CheckBoxResponse"
+		 	android:layout_height="wrap_content"
+		 	android:text="@string/feedbackresponse"
+		 	android:layout_width="fill_parent"
+		 />
+		 
+		 <Button
+		 	android:id="@+id/ButtonSendFeedback"
+		 	android:layout_height="wrap_content"
+		 	android:text="@string/feedbackbutton"
+		 	android:onClick="sendFeedback"
+		 	android:layout_width="fill_parent"
+		 />
+		 
+	</LinearLayout>
+
+</ScrollView>

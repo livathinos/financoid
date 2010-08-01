@@ -1,5 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="hello">Hello World, financoid!</string>
-    <string name="app_name">financoid</string>
+    <string name="app_name">Financoid</string>
+    <string name="feedbacktitle">Help us make financoid better</string>
+    <string name="feedbackname">Name</string>
+    <string name="feedbackemail">E-mail</string>
+    <string name="feedbackbody">Text</string>
+    <string name="feedbackresponse">Enter type of feedback</string>
+    <string name="feedbackbutton">Send Feedback</string>
+    <string name="feedbacktype">Type of feedback</string>
+    <string name="feedbacktype1">Praise</string>  
+    <string name="feedbacktype2">Gripe</string>  
+    <string name="feedbacktype3">Suggestion</string>  
+    <string name="feedbacktype4">Bug</string>
+    <string name="buttontext_simpleemail">Send plain text</string>
+    <string name="chooser">Send message using:</string>
+    <string name="chooser_pic">Send picture using:</string>
+    <string name="buttontext_simpleemail_chooser">Send a message (Choose app to send)
+	</string>
+	<string name="buttontext_email">Send plaintext message (with supplied content)
+	</string>
+	<string name="buttontext_msg_pic">Send picture msg (with supplied content)
+	</string>
+	<string name="email_message">This is my message body.\n\nCheers,\nMe
+	</string>
+	<string name="email_subject">This is my subject</string>
+	<string name="email_address">test@fakehost.com</string>
+	<string name="email_address_cc">test_cc@fakehost.com</string>
+	<string name="email_address_bcc">test_bcc@fakehost.com</string>  
 </resources>
