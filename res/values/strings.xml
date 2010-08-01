@@ -7,6 +7,7 @@
     <string name="feedbackemail">E-mail</string>
     <string name="feedbackbody">Text</string>
     <string name="feedbackresponse">Enter type of feedback</string>
+    <string name="feedbackresponsecheck">Would you like a response?</string>
     <string name="feedbackbutton">Send Feedback</string>
     <string name="feedbacktype">Type of feedback</string>
     <string name="feedbacktype1">Praise</string>  
@@ -25,7 +26,27 @@
 	<string name="email_message">This is my message body.\n\nCheers,\nMe
 	</string>
 	<string name="email_subject">This is my subject</string>
-	<string name="email_address">test@fakehost.com</string>
+	<string name="email_address">livathinos.spyros@gmail.com</string>
 	<string name="email_address_cc">test_cc@fakehost.com</string>
-	<string name="email_address_bcc">test_bcc@fakehost.com</string>  
+	<string name="email_address_bcc">test_bcc@fakehost.com</string>
+	<string name="invite_message_preview_title">Message to send:</string>
+	<string name="invite_email_label">Enter email:</string>
+	<string name="pick_email_label">Browse...</string>
+	<string name="invite_activity_title">Invite Someone to Something</string>
+	<string name="message_preview">Message will go here...</string>
+	        <string name="invitetypeprompt">Pick type of invite...</string>
+        <string name="invite_email_hint">Enter email...</string>
+    <string
+        name="invitetype1">Coffee</string>
+    <string
+        name="invitetype2">Lunch</string>
+    <string
+        name="invitetype3">Walk Around the Block</string>
+    <string name="feedbackmessagebody_format">To: The %1$s Department\n\n %2$s\n\n %3$s (%4$s) - %5$s</string>
+    <string
+        name="feedbackmessagebody_responseyes">Requires a response</string>
+    <string
+        name="feedbackmessagebody_responseno">Does not require a response</string>
+    <string
+        name="feedbackmessagesubject_format">Application Feedback (%1$s)</string>
 </resources>
