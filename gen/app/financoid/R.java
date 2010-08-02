@@ -15,22 +15,57 @@ public final class R {
     public static final class attr {
     }
     public static final class drawable {
-        public static final int icon=0x7f020000;
+        public static final int barcode=0x7f020000;
+        public static final int cards=0x7f020001;
+        public static final int chart=0x7f020002;
+        public static final int clock=0x7f020003;
+        public static final int cloud=0x7f020004;
+        public static final int colourpicker=0x7f020005;
+        public static final int dialog=0x7f020006;
+        public static final int dice=0x7f020007;
+        public static final int disc=0x7f020008;
+        public static final int equalizer=0x7f020009;
+        public static final int filter=0x7f02000a;
+        public static final int flag=0x7f02000b;
+        public static final int flash=0x7f02000c;
+        public static final int globe=0x7f02000d;
+        public static final int happy=0x7f02000e;
+        public static final int icon=0x7f02000f;
+        public static final int largetiles=0x7f020010;
+        public static final int light=0x7f020011;
+        public static final int love=0x7f020012;
+        public static final int magnet=0x7f020013;
+        public static final int monitor=0x7f020014;
+        public static final int music=0x7f020015;
+        public static final int piechart=0x7f020016;
+        public static final int ruler=0x7f020017;
+        public static final int sad=0x7f020018;
+        public static final int seal=0x7f020019;
+        public static final int shopping=0x7f02001a;
+        public static final int smalltiles=0x7f02001b;
+        public static final int sun=0x7f02001c;
+        public static final int tag=0x7f02001d;
+        public static final int umbrella=0x7f02001e;
     }
     public static final class id {
-        public static final int ButtonLaunchFeedback=0x7f060008;
-        public static final int ButtonSendFeedback=0x7f060007;
-        public static final int CheckBoxResponse=0x7f060006;
-        public static final int EditTextEmail=0x7f060003;
-        public static final int EditTextFeedbackBody=0x7f060005;
-        public static final int EditTextName=0x7f060002;
-        public static final int ScrollView01=0x7f060000;
-        public static final int SpinnerFeedbackType=0x7f060004;
-        public static final int TextViewTitle=0x7f060001;
+        public static final int ButtonSendFeedback=0x7f070007;
+        public static final int CheckBoxResponse=0x7f070006;
+        public static final int EditTextEmail=0x7f070003;
+        public static final int EditTextFeedbackBody=0x7f070005;
+        public static final int EditTextName=0x7f070002;
+        public static final int ScrollView01=0x7f070000;
+        public static final int SpinnerFeedbackType=0x7f070004;
+        public static final int TextViewTitle=0x7f070001;
+        public static final int menu_item_feedback=0x7f070009;
+        public static final int menu_item_settings=0x7f07000a;
+        public static final int menu_item_statistics=0x7f070008;
     }
     public static final class layout {
         public static final int form=0x7f030000;
         public static final int main=0x7f030001;
+    }
+    public static final class menu {
+        public static final int menu=0x7f060000;
     }
     public static final class string {
         public static final int app_name=0x7f050001;
