@@ -7,8 +7,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
-import android.graphics.Canvas;
 
 public class Financoid extends Activity {
 
@@ -64,23 +62,35 @@ public class Financoid extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
         
-        	case R.id.menu_item_addnew: Intent launchNewTransactionActivity = new Intent(this, NewTransactionActivity.class);
-        						startActivity(launchNewTransactionActivity);
-        						break;
-        	case R.id.menu_item_statistics: Intent launchStatisticsActivity = new Intent(this, StatisticsActivity.class);
-        						startActivity(launchStatisticsActivity);
-        						break;
-            case R.id.menu_item_feedback: Intent launchFormActivity = new Intent(this, FormActivity.class);
-            					startActivity(launchFormActivity);
-                                break;
-            case R.id.menu_item_settings: Intent launchSettingsActivity = new Intent(this, StatisticsActivity.class);
-            					startActivity(launchSettingsActivity);
-                                break;
+        	case R.id.menu_item_addnew: launchNewTransaction();
+        								break;
+        								
+        	case R.id.menu_item_statistics: launchStatistics();
+        									break;
+        									
+            case R.id.menu_item_feedback: launchForm();
+                                		  break;
+                                		  
+            case R.id.menu_item_settings: launchSettings();
+                                		  break;
+                                		  
         }
         return true;
     }
     
-    /*No menu yet, we just launch the form layout.*/
+    /*
+     * [DEPRECATED] FUNCTION: public void launchForm(View button)
+     * 
+     * DESCRIPTION: Works at the press of a button, launching the feedback form.
+     * 		
+     * 		INPUTS: View button
+     * 		OUTPUTS: (none)
+     * 
+     * 		NEW VERSION: protected void launchForm()
+     * 
+     * 		TODO: Remove function in future version of the application.
+     * 								
+     */
     public void launchForm(View button) {
 
         Intent launchFormActivity = new Intent(this, FormActivity.class); 
@@ -89,18 +99,72 @@ public class Financoid extends Activity {
     }
     
     /*
-     * FUNCTION: public void onDraw(Canvas canvas)
+     * FUNCTION: protected void launchNewTransaction()
      * 
-     * DESCRIPTION: Override of native function. Draws a canvas
+     * DESCRIPTION: Launches the new transaction activity screen.
      * 
-     * 		INPUTS: Canvas canvas
+     * 		INPUTS: (none)
      * 		OUTPUTS: (none)
      * 
      * 
      */
-    
-    //public void onDraw(Canvas canvas) {
+    protected void launchNewTransaction() {
     	
-    //}
+    	Intent launchNewTransactionActivity = new Intent(this, NewTransactionActivity.class);
+    	startActivity(launchNewTransactionActivity);
+    	
+    }
+    
+    /*
+     * FUNCTION: protected void launchStatistics()
+     * 
+     * DESCRIPTION: Launches the statistics activity screen.
+     * 
+     * 		INPUTS: (none)
+     * 		OUTPUTS: (none)
+     * 
+     * 
+     */    
+    protected void launchStatistics() {
+    	
+    	Intent launchStatisticsActivity = new Intent(this, StatisticsActivity.class);
+    	startActivity(launchStatisticsActivity);
+    	
+    }
+    
+    /*
+     * FUNCTION: protected void launchForm()
+     * 
+     * DESCRIPTION: Launches the feedback form activity screen.
+     * 
+     * 		INPUTS: (none)
+     * 		OUTPUTS: (none)
+     * 
+     * 
+     */
+    protected void launchForm() {
+    	
+    	Intent launchFormActivity = new Intent(this, FormActivity.class);
+    	startActivity(launchFormActivity);
+    	
+    }
+    
+    /*
+     * FUNCTION: protected void launchSettings()
+     * 
+     * DESCRIPTION: Launches the settings activity screen.
+     * 
+     * 		INPUTS: (none)
+     * 		OUTPUTS: (none)
+     * 
+     * 
+     */
+    protected void launchSettings() {
+    	
+    	Intent launchSettings = new Intent(this, SettingsActivity.class);
+    	startActivity(launchSettings);
+    	
+    }
+    
 
 }
