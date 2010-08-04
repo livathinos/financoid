@@ -6,17 +6,22 @@
     <application android:icon="@drawable/icon" android:label="@string/app_name">
         <activity android:name="Financoid"
                   android:label="@string/app_name"
-                  android:theme="@style/CustomDialogTheme">
+                  android:theme="@style/FinancoidMainTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="FormActivity"></activity>
-        <activity android:name="NewTransactionActivity"></activity>
-        <activity android:name="CategoriesActivity"></activity>
-        <activity android:name="SettingsActivity"></activity>
-        <activity android:name="StatisticsActivity"></activity>
+        <activity android:name="FormActivity"
+        		  android:theme="@style/FinancoidMainTheme"></activity>
+        <activity android:name="NewTransactionActivity"
+        		  android:theme="@style/FinancoidMainTheme"></activity>
+        <activity android:name="CategoriesActivity"
+        		  android:theme="@style/FinancoidMainTheme"></activity>
+        <activity android:name="SettingsActivity"
+        		  android:theme="@style/FinancoidMainTheme"></activity>
+        <activity android:name="StatisticsActivity"
+        		  android:theme="@style/FinancoidMainTheme"></activity>
         <!--<activity android:name="InviteActivity"></activity>-->
 
     </application>

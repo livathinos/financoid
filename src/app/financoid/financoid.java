@@ -1,14 +1,17 @@
 package app.financoid;
 
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.app.Activity;
+//import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TabHost;
+import android.app.TabActivity;
 
-public class Financoid extends Activity {
+public class Financoid extends TabActivity {
 
 	/*
 	 * FUNCTION: public void onCreate(Bundle savedInstanceState)
@@ -25,7 +28,24 @@ public class Financoid extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
+        //setContentView(R.layout.main);
+        
+        TabHost tabHost = getTabHost();
+        
+        LayoutInflater.from(this).inflate(R.layout.main_tabs, tabHost.getTabContentView(), true);
+        
+        tabHost.addTab(tabHost.newTabSpec("tab1")
+        		.setIndicator("Overview",getResources().getDrawable(R.drawable.emo_im_money_mouth))
+                .setContent(R.id.view1));
+        		//.setContent(new Intent(this, OverviewActivity.class));
+        tabHost.addTab(tabHost.newTabSpec("tab2")
+                .setIndicator("Latest", getResources().getDrawable(R.drawable.barcode))
+                .setContent(R.id.view2));
+        		//.setContent(new Intent(this, LatestActivity.class));
+        tabHost.addTab(tabHost.newTabSpec("tab3")
+        		.setIndicator("Categories", getResources().getDrawable(R.drawable.chart))
+                .setContent(R.id.view3));
+        		//.setContent(new Intent(this, CategoriesActivity.class));
     }
     
     /*

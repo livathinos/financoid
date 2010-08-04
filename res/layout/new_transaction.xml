@@ -1,15 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:layout_width="wrap_content"
-  android:layout_height="wrap_content">
-  
-  	<Button
-	 	android:id="@+id/ButtonLaunchFeedback"
-	 	android:layout_height="wrap_content"
-	 	android:text="@string/feedbackbutton"
-	 	android:onClick="launchForm"
-	 	android:layout_width="fill_parent"
-	 />
-		 
-</LinearLayout>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+    <TableLayout android:layout_width="match_parent"
+                 android:layout_height="match_parent">
+        <TableRow>
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text="@string/transactionCategoryLabel"/>
+        </TableRow>
+        <TableRow>
+            <Spinner android:layout_height="wrap_content"
+                     android:layout_width="match_parent"
+                     android:layout_weight="1"
+                     android:id="@+id/transactionCategorySpinner"/>
+        </TableRow>
+        <TableRow>
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text="@string/transactionNameLabel"/>
+        </TableRow>
+        <TableRow>
+            <EditText android:id="@+id/transactionNameEditText"
+                      android:layout_height="wrap_content"
+                      android:layout_width="wrap_content"
+                      android:layout_weight="1"/>
+        </TableRow>
+        <TableRow>
+            <TextView android:text="@string/transactionAmountLabel"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"/>
+        </TableRow>
+        <TableRow>
+            <EditText android:id="@+id/transactionAmountText"
+                      android:layout_height="wrap_content"
+                      android:layout_width="wrap_content"
+                      android:layout_weight="1"/>
+            <Spinner android:id="@+id/transactionTypeSpinner"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"/>
+        </TableRow>
+        <TableRow>
+            <Button android:layout_height="wrap_content"
+                    android:text="@string/transactionSave"
+                    android:id="@+id/transactionSaveButton"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"/>
+        </TableRow>
+    </TableLayout>
+</ScrollView>

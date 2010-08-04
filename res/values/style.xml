@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<style name="CustomDialogTheme" parent="@android:style/Theme.Wallpaper">
+<style name="FinancoidMainTheme" parent="@android:style/Theme.Wallpaper">
     <item name="android:windowBackground">@drawable/bg_main</item>
+    <item name="android:textColor">#3F3F3F</item>
 </style>
 </resources>

@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+	<!-- 
+	
+		TITLE: General purpose Strings
+		
+		DESCRIPTION: Strings that are used throughout the application
+					 are stored here.
+
+	-->
+	<string name="tabs_1_tab_1">Overview</string>
+	<string name="tabs_1_tab_2">Latest</string>
+	<string name="tabs_1_tab_3">Categories</string>
     <string name="hello">Hello World, financoid!</string>
     <string name="app_name">Financoid</string>
     <string name="feedbacktitle">Help us make financoid better</string>
@@ -48,5 +60,20 @@
     <string
         name="feedbackmessagebody_responseno">Does not require a response</string>
     <string
-        name="feedbackmessagesubject_format">Application Feedback (%1$s)</string>
+        name="feedbackmessagesubject_format">Application Feedback (%1$s)</string>   
+     
+     
+     <!-- 
+     	
+     	  TITLE: "New Transaction" Strings
+     	  
+     	  DESCRIPTION: Strings that are used in the New Transaction Activity
+     
+     -->
+     
+     <string name="transactionCategoryLabel">Category</string>
+     <string name="transactionNameLabel">Transaction title</string>
+     <string name="transactionAmountLabel">Amount</string>
+     <string name="transactionSave">Save Transaction</string>
+     
 </resources>
