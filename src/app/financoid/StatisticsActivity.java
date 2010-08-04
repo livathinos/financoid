@@ -1,0 +1,26 @@
+package app.financoid;
+
+import android.app.Activity;
+import android.os.Bundle;
+
+public class StatisticsActivity extends Activity {
+
+	/*
+	 * FUNCTION: public void onCreate(Bundle savedInstanceState)
+	 * 
+	 * DESCRIPTION: Override of native function. Called when the application
+	 * 				is first initialized.
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 * 
+	 * 		INPUTS: Bundle savedInstanceState
+	 * 		OUTPUTS: (none)
+	 * 
+	 */
+	
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.statistics_overview);
+    }
+	
+}

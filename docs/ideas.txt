@@ -1,0 +1,36 @@
+1. car start with phone
+2. computer start/stop with phone from distance. Possibly other devices could be connected to a receiver as well, with a menu to choose from which device one wants to start stop.
+
+
+
+
+
+/*accidentDroid*/
+/*An app that detects when an accident is about to happen and calls 911. e.g. when going from 0 to 60km/h in 2 seconds it waits for 15 seconds, then calls 911. An idea is for the app to be enabled only when inside the car. In order for the phone to detect that, it needs to be able to detect a speed of travel larger than the median speed of travel of a human walking/running.*/
+
+accidentDroid {
+	. get into 'car mode' - detect whenever a user is inside a car by measuring his acceleration and median velocity and ruling out that the user is just out
+	  and about walking/running
+	. detect abrupt change in speed in a short period of time (e.g. 60km/h to 0 km/h in a 2 second time frame)
+	. call/message a service/person on such an event. i.e. call 911/message a relative/call a service
+	. options should be presented to the user regarding who/what to call or message
+	. app should send out GPS location if possible
+	. user should be able to disable it at will
+	. An idea is for the app to be enabled only when inside the car. In order for the phone to detect that, it needs to be able to detect a speed of travel
+	  larger than the median speed of travel of a human being walking/running.
+	. a grace period of 30 seconds should be given before the app does anything in which time frame it should beep/flash and the user can call the alarm off,
+	  in order to avoid false alarms
+}
+
+financeDroid {
+	. pie charts
+	. output to CSV file of monthly/weekly expenses
+	. indication of how much inside/outside of your spending plans you are at any given day
+	. median of expenditure per day (changing in real time every time a new expenditure is added)
+	. prediction of how much inside/outside your spending plans you will be at the end of the month/week (charts)
+	. password protection in the app. User can login with his account from the website that's running so he can sync his lists/expenses etc
+	. ability to have "hidden" items in user's shareable lists
+	. shareable list of things to buy
+	. list should have a web interface as well, with an account you can share with people so they can add things to your lists at any time
+	. droid app for general idea
+}
