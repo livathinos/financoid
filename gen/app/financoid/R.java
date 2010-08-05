@@ -25,6 +25,7 @@ public final class R {
         public static final int battery_charge_fill_warning=0x7f020007;
         public static final int battery_low_battery=0x7f020008;
         public static final int bg_main=0x7f020009;
+        public static final int black=0x7f0202ea;
         public static final int bottom_bar=0x7f02000a;
         public static final int btn_check_buttonless_off=0x7f02000b;
         public static final int btn_check_buttonless_on=0x7f02000c;
@@ -760,6 +761,7 @@ public final class R {
         public static final int unknown_image=0x7f0202e6;
         public static final int usb_android=0x7f0202e7;
         public static final int usb_android_connected=0x7f0202e8;
+        public static final int white=0x7f0202eb;
         public static final int zoom_plate=0x7f0202e9;
     }
     public static final class id {
