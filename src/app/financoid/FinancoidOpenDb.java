@@ -1,10 +1,17 @@
 package app.financoid;
 
 import java.io.*;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Calendar;
 
 import android.content.Context;
 import android.database.SQLException;
-import android.database.sqlite.*; 
+import android.database.Cursor;
+import android.database.sqlite.*;
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteDatabase.CursorFactory;
+
 /*
 public class FinancoidOpenDb extends SQLiteOpenHelper {
 
@@ -68,7 +75,7 @@ public class FinancoidOpenDb extends SQLiteOpenHelper{
 	 
 	    		//By calling this method and empty database will be created into the default system path
 	               //of your application so we are gonna be able to overwrite that database with our database.
-	        	this.getReadableDatabase();
+	        	this.getWritableDatabase();
 	 
 	        	try {
 	 
@@ -93,7 +100,7 @@ public class FinancoidOpenDb extends SQLiteOpenHelper{
 	 
 	    	try{
 	    		String myPath = DB_PATH + DB_NAME;
-	    		checkDB = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY);
+	    		checkDB = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
 	 
 	    	}catch(SQLiteException e){
 	 
@@ -139,12 +146,33 @@ public class FinancoidOpenDb extends SQLiteOpenHelper{
 	    	myInput.close();
 	 
 	    }
+	    
+	    public long insertEntry(String dbTable, ArrayList<String> key, ArrayList<String> value) {
+			//String timeStamp = new Timestamp(Calendar.getInstance().getTimeInMillis()).toString();
+			ContentValues contentValues = new ContentValues();
+			for(int i = 0; key.size() > i; i++){
+				contentValues.put(key.get(i), value.get(i));
+			}
+			//contentValues.put(KEY_TIMESTAMP, timeStamp);
+	    	
+			return myDataBase.insert(dbTable, null, contentValues);
+		}
+	    
+	    public Cursor getAllEntries(String dbTable, String[] columns, String selection, String[] selectionArgs,
+				String groupBy, String having, String sortBy, String sortOption) {
+			return myDataBase.query(dbTable, columns, selection, selectionArgs, groupBy,
+					having, sortBy + " " + sortOption);
+		}
+
+
 	 
-	    public void openDataBase() throws SQLException{
+	    public SQLiteDatabase openDataBase() throws SQLException{
 	 
 	    	//Open the database
 	        String myPath = DB_PATH + DB_NAME;
-	    	myDataBase = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY);
+	    	myDataBase = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
+	    	
+	    	return myDataBase;
 	 
 	    }
 	 

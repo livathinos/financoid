@@ -36,15 +36,16 @@
                       android:layout_height="wrap_content"
                       android:layout_width="wrap_content"
                       android:layout_weight="1"/>
-            <Spinner android:id="@+id/transactionTypeSpinner"
+            <!--<Spinner android:id="@+id/transactionTypeSpinner"
                      android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"/>
+                     android:layout_height="wrap_content"/>-->
         </TableRow>
         <TableRow>
             <Button android:layout_height="wrap_content"
                     android:text="@string/transactionSave"
                     android:id="@+id/transactionSaveButton"
                     android:layout_width="match_parent"
+                    android:onClick="saveTransaction"
                     android:layout_weight="1"/>
         </TableRow>
     </TableLayout>
