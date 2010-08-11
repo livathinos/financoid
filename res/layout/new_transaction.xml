@@ -45,7 +45,6 @@
                     android:text="@string/transactionSave"
                     android:id="@+id/transactionSaveButton"
                     android:layout_width="match_parent"
-                    android:onClick="saveTransaction"
                     android:layout_weight="1"/>
         </TableRow>
     </TableLayout>
