@@ -9,9 +9,11 @@
 					 are stored here.
 
 	-->
+	<string name="overview">Overview</string>
 	<string name="tabs_1_tab_1">Overview</string>
-	<string name="tabs_1_tab_2">Latest</string>
-	<string name="tabs_1_tab_3">Categories</string>
+	<string name="tabs_1_tab_2">Today</string>
+	<string name="tabs_1_tab_3">Statistics</string>
+	<string name="tabs_1_tab_4">Charts</string>
     <string name="hello">Hello World, financoid!</string>
     <string name="app_name">Financoid</string>
     <string name="feedbacktitle">Help us make financoid better</string>

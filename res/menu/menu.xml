@@ -6,6 +6,9 @@
 	<item android:id="@+id/menu_item_statistics"
 		  android:title="Statistics"
 		  android:icon="@drawable/piechart"></item>
+	<item android:id="@+id/menu_item_export"
+		  android:title="Export data"
+		  android:icon="@drawable/cloud"></item>
 	<item android:id="@+id/menu_item_feedback"
 		  android:title="Feedback"
 		  android:icon="@drawable/happy"></item>

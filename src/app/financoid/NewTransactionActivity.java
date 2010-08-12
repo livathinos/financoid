@@ -1,6 +1,5 @@
 package app.financoid;
 import java.io.*;
-import java.util.ArrayList;
 
 import android.app.Activity;
 import android.database.Cursor;
@@ -8,7 +7,6 @@ import android.database.SQLException;
 import android.database.sqlite.*;
 import android.os.Bundle;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SimpleCursorAdapter;
@@ -19,7 +17,6 @@ import android.view.View;
 
 public class NewTransactionActivity extends Activity {
 	 
-	private ArrayList<String> mCategories;
     private Spinner mCategorySpinner;
     private EditText mTransactionNameEditText;
     private EditText mTransactionAmountEditText;
@@ -60,9 +57,6 @@ public class NewTransactionActivity extends Activity {
         mTransactionAmountEditText = (EditText) findViewById(R.id.transactionAmountText);
         mTransactionSaveButton = (Button) findViewById(R.id.transactionSaveButton);
         
-        // Prepare model for category spinner
-        mCategories = new ArrayList<String>();
-        
         model = getAllCategories();
         SimpleCursorAdapter ModelAdapter = new SimpleCursorAdapter(this,
         		   android.R.layout.simple_spinner_item, model,
@@ -99,7 +93,16 @@ public class NewTransactionActivity extends Activity {
         
     }
     
-    
+    /*
+     * FUNCTIN: public Cursor getAllCategories()
+     * 
+     * DESCRIPTION: Returns all categories inside the database tables 'categories'
+     * 
+     * 		INPUTS: (none)
+     * 		OUTPUTS: (none)
+     * 
+     * 
+     */
     public Cursor getAllCategories() {
     	String tableName = "categories";
 
@@ -110,6 +113,8 @@ public class NewTransactionActivity extends Activity {
     /*
      * FUNCTION: public void updateCategorySelection()
      * 
+     * DESCRIPTION: [PLACEHOLDER]
+     * 
      */
     public void updateCategorySelection() {
     	
@@ -118,10 +123,18 @@ public class NewTransactionActivity extends Activity {
     /*
      * FUNCTION: public void onSaveButtonClicked()
      * 
+     * DESCRIPTION: Called when the save button is clicked. Calls upon the createTransactionEntry() 
+     * 				function in order to create a new transaction.
+     * 
+     * 		INPUTS: (none)
+     * 		OUTPUTS: (none)
+     * 
+     * 
      */
     public void onSaveButtonClicked() {
     	
     	Log.v(TAG, "Save button clicked");
+    	
         createTransactionEntry();
         finish();
     	
@@ -130,15 +143,21 @@ public class NewTransactionActivity extends Activity {
     /*
      * FUNCTION: public void createTransactionEntry()
      * 
+     * DESCRIPTION: Creates a new transaction inserting a new row of data into the 'transactions'
+     * 				table of the datatabase.
+     * 
+     * 		INPUTS: (none)
+     * 		OUTPUTS: (none)
+     * 
+     * 
      */
     public void createTransactionEntry() {
     	
     	String trans_name = mTransactionNameEditText.getText().toString();
         String trans_amount = mTransactionAmountEditText.getText().toString();
-        //String trans_cat = item.toString();
         
-        dbConn.execSQL("INSERT INTO " + TRANSACTION_TABLE + " (transaction_title, transaction_value, transaction_prefix, transaction_category)"
-				+ " VALUES ('" + trans_name + "', '" + trans_amount + "', '+', '" + trans_cat + "');");
+        dbConn.execSQL("INSERT INTO " + TRANSACTION_TABLE + " (transaction_title, transaction_value, transaction_prefix, transaction_category, transaction_date)"
+				+ " VALUES ('" + trans_name + "', '" + trans_amount + "', '+', '" + trans_cat + "', datetime());");
         /*dbConn.execSQL("INSERT INTO categories (category_name, category_description) VALUES ('Clothes', 'Money you spent on clothes and other wearable apparel');");
         dbConn.execSQL("INSERT INTO categories (category_name, category_description) VALUES ('Entertainment', 'Money you spent on drinks/movies/theater or other places of entertainment');");
         dbConn.execSQL("INSERT INTO categories (category_name, category_description) VALUES ('Books', 'Money you spent on books');");
@@ -184,20 +203,6 @@ public class NewTransactionActivity extends Activity {
 	 	return dbConn;
 
 
-    }
+    }//end of function connectToDb()
     
-    
-    /*
-     * FUNCTION: public void saveTransaction()
-     * 
-     * DESCRIPTION: Saves the transaction that was entered by the user.
-     * 
-     * 		INPUTS: (none)
-     * 		OUTPUTS: (none)
-     * 
-     * 
-     */
-    public void saveTransaction(View button){
-    	
-    }
-}
+}//end of class NewTransactionActivity

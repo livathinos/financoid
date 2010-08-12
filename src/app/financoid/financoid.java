@@ -28,7 +28,11 @@ public class Financoid extends TabActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.main);
+        
+        //Removes the title bar from the application top
+        //requestWindowFeature(Window.FEATURE_NO_TITLE);
+        
+        //setContentView(R.layout.main_tabs);
         
         TabHost tabHost = getTabHost();
         tabHost.setBackgroundColor(Color.BLACK);
@@ -37,16 +41,16 @@ public class Financoid extends TabActivity {
         
         tabHost.addTab(tabHost.newTabSpec("tab1")
         		.setIndicator("Overview",getResources().getDrawable(R.drawable.emo_im_money_mouth))
-                .setContent(R.id.view1));
-        		//.setContent(new Intent(this, OverviewActivity.class));
+                //.setContent(R.id.view1));
+        		.setContent(new Intent(this, OverviewActivity.class)));
         tabHost.addTab(tabHost.newTabSpec("tab2")
-                .setIndicator("Latest", getResources().getDrawable(R.drawable.barcode))
-                .setContent(R.id.view2));
-        		//.setContent(new Intent(this, LatestActivity.class));
+                .setIndicator("Today", getResources().getDrawable(R.drawable.barcode))
+                //.setContent(R.id.view2));
+        		.setContent(new Intent(this, LatestActivity.class)));
         tabHost.addTab(tabHost.newTabSpec("tab3")
-        		.setIndicator("Categories", getResources().getDrawable(R.drawable.chart))
-                .setContent(R.id.view3));
-        		//.setContent(new Intent(this, CategoriesActivity.class));
+        		.setIndicator("Statistics", getResources().getDrawable(R.drawable.chart))
+                //.setContent(R.id.view3));
+        		.setContent(new Intent(this, CategoriesActivity.class)));
     }
     
     /*
@@ -88,6 +92,9 @@ public class Financoid extends TabActivity {
         								
         	case R.id.menu_item_statistics: launchStatistics();
         									break;
+        									
+        	case R.id.menu_item_export: launchExport();
+        								break;
         									
             case R.id.menu_item_feedback: launchForm();
                                 		  break;
@@ -150,6 +157,23 @@ public class Financoid extends TabActivity {
     	
     	Intent launchStatisticsActivity = new Intent(this, StatisticsActivity.class);
     	startActivity(launchStatisticsActivity);
+    	
+    }
+    
+    /*
+     * FUNCTION: protected void launchNewTransaction()
+     * 
+     * DESCRIPTION: Launches the new transaction activity screen.
+     * 
+     * 		INPUTS: (none)
+     * 		OUTPUTS: (none)
+     * 
+     * 
+     */
+    protected void launchExport() {
+    	
+    	Intent launchExportActivity = new Intent(this, ExportActivity.class);
+    	startActivity(launchExportActivity);
     	
     }
     

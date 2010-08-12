@@ -1,16 +1,13 @@
 package app.financoid;
 
 import java.io.*;
-import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Calendar;
 
 import android.content.Context;
 import android.database.SQLException;
 import android.database.Cursor;
 import android.database.sqlite.*;
 import android.content.ContentValues;
-import android.database.sqlite.SQLiteDatabase.CursorFactory;
 
 /*
 public class FinancoidOpenDb extends SQLiteOpenHelper {
@@ -80,6 +77,7 @@ public class FinancoidOpenDb extends SQLiteOpenHelper{
 	        	try {
 	 
 	    			copyDataBase();
+	    			
 	 
 	    		} catch (IOException e) {
 	 
@@ -194,13 +192,7 @@ public class FinancoidOpenDb extends SQLiteOpenHelper{
 		@Override
 		public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 	 
-		}
-
-	 
-	        // Add your public helper methods to access and get content from the database.
-	       // You could return cursors by doing "return myDataBase.query(....)" so it'd be easy
-	       // to you to create adapters for your views.
-	 
+		}	 
 	}
 
 

@@ -23,6 +23,7 @@ public final class R {
         public static final int create_contact=0x7f020004;
         public static final int emo_im_money_mouth=0x7f020005;
         public static final int equalizer=0x7f020006;
+        public static final int gray=0x7f020021;
         public static final int happy=0x7f020007;
         public static final int ic_btn_search=0x7f020008;
         public static final int ic_btn_search_go=0x7f020009;
@@ -50,78 +51,84 @@ public final class R {
         public static final int white=0x7f020020;
     }
     public static final class id {
-        public static final int ButtonSendFeedback=0x7f080007;
-        public static final int CheckBoxResponse=0x7f080006;
-        public static final int EditTextEmail=0x7f080003;
-        public static final int EditTextFeedbackBody=0x7f080005;
-        public static final int EditTextName=0x7f080002;
-        public static final int ScrollView01=0x7f080000;
-        public static final int SpinnerFeedbackType=0x7f080004;
-        public static final int TextViewTitle=0x7f080001;
-        public static final int menu_item_addnew=0x7f08000f;
-        public static final int menu_item_feedback=0x7f080011;
-        public static final int menu_item_settings=0x7f080012;
-        public static final int menu_item_statistics=0x7f080010;
+        public static final int ButtonSendFeedback=0x7f08000a;
+        public static final int CheckBoxResponse=0x7f080009;
+        public static final int EditTextEmail=0x7f080006;
+        public static final int EditTextFeedbackBody=0x7f080008;
+        public static final int EditTextName=0x7f080005;
+        public static final int ScrollView01=0x7f080003;
+        public static final int SpinnerFeedbackType=0x7f080007;
+        public static final int TRANS_CATEGORY=0x7f080002;
+        public static final int TRANS_TITLE=0x7f080000;
+        public static final int TRANS_VALUE=0x7f080001;
+        public static final int TextViewTitle=0x7f080004;
+        public static final int menu_item_addnew=0x7f080012;
+        public static final int menu_item_export=0x7f080014;
+        public static final int menu_item_feedback=0x7f080015;
+        public static final int menu_item_settings=0x7f080016;
+        public static final int menu_item_statistics=0x7f080013;
         public static final int transactionAmountText=0x7f08000d;
         public static final int transactionCategorySpinner=0x7f08000b;
         public static final int transactionNameEditText=0x7f08000c;
         public static final int transactionSaveButton=0x7f08000e;
-        public static final int view1=0x7f080008;
-        public static final int view2=0x7f080009;
-        public static final int view3=0x7f08000a;
+        public static final int widget31=0x7f080011;
+        public static final int widget32=0x7f080010;
+        public static final int widget38=0x7f08000f;
     }
     public static final class layout {
-        public static final int categories=0x7f030000;
-        public static final int form=0x7f030001;
-        public static final int main=0x7f030002;
-        public static final int main_tabs=0x7f030003;
-        public static final int new_transaction=0x7f030004;
-        public static final int settings=0x7f030005;
-        public static final int statistics_overview=0x7f030006;
+        public static final int balance_row=0x7f030000;
+        public static final int categories=0x7f030001;
+        public static final int form=0x7f030002;
+        public static final int main=0x7f030003;
+        public static final int main_tabs=0x7f030004;
+        public static final int new_transaction=0x7f030005;
+        public static final int overview=0x7f030006;
+        public static final int settings=0x7f030007;
+        public static final int statistics_overview=0x7f030008;
+        public static final int tabs=0x7f030009;
     }
     public static final class menu {
         public static final int menu=0x7f070000;
     }
     public static final class string {
-        public static final int app_name=0x7f050004;
-        public static final int buttontext_email=0x7f050015;
-        public static final int buttontext_msg_pic=0x7f050016;
-        public static final int buttontext_simpleemail=0x7f050011;
-        public static final int buttontext_simpleemail_chooser=0x7f050014;
-        public static final int chooser=0x7f050012;
-        public static final int chooser_pic=0x7f050013;
-        public static final int email_address=0x7f050019;
-        public static final int email_address_bcc=0x7f05001b;
-        public static final int email_address_cc=0x7f05001a;
-        public static final int email_message=0x7f050017;
-        public static final int email_subject=0x7f050018;
-        public static final int feedbackbody=0x7f050008;
-        public static final int feedbackbutton=0x7f05000b;
-        public static final int feedbackemail=0x7f050007;
-        public static final int feedbackmessagebody_format=0x7f050026;
-        public static final int feedbackmessagebody_responseno=0x7f050028;
-        public static final int feedbackmessagebody_responseyes=0x7f050027;
-        public static final int feedbackmessagesubject_format=0x7f050029;
-        public static final int feedbackname=0x7f050006;
-        public static final int feedbackresponse=0x7f050009;
-        public static final int feedbackresponsecheck=0x7f05000a;
-        public static final int feedbacktitle=0x7f050005;
-        public static final int feedbacktype=0x7f05000c;
-        public static final int feedbacktype1=0x7f05000d;
-        public static final int feedbacktype2=0x7f05000e;
-        public static final int feedbacktype3=0x7f05000f;
-        public static final int feedbacktype4=0x7f050010;
-        public static final int hello=0x7f050003;
-        public static final int invite_activity_title=0x7f05001f;
-        public static final int invite_email_hint=0x7f050022;
-        public static final int invite_email_label=0x7f05001d;
-        public static final int invite_message_preview_title=0x7f05001c;
-        public static final int invitetype1=0x7f050023;
-        public static final int invitetype2=0x7f050024;
-        public static final int invitetype3=0x7f050025;
-        public static final int invitetypeprompt=0x7f050021;
-        public static final int message_preview=0x7f050020;
-        public static final int pick_email_label=0x7f05001e;
+        public static final int app_name=0x7f050006;
+        public static final int buttontext_email=0x7f050017;
+        public static final int buttontext_msg_pic=0x7f050018;
+        public static final int buttontext_simpleemail=0x7f050013;
+        public static final int buttontext_simpleemail_chooser=0x7f050016;
+        public static final int chooser=0x7f050014;
+        public static final int chooser_pic=0x7f050015;
+        public static final int email_address=0x7f05001b;
+        public static final int email_address_bcc=0x7f05001d;
+        public static final int email_address_cc=0x7f05001c;
+        public static final int email_message=0x7f050019;
+        public static final int email_subject=0x7f05001a;
+        public static final int feedbackbody=0x7f05000a;
+        public static final int feedbackbutton=0x7f05000d;
+        public static final int feedbackemail=0x7f050009;
+        public static final int feedbackmessagebody_format=0x7f050028;
+        public static final int feedbackmessagebody_responseno=0x7f05002a;
+        public static final int feedbackmessagebody_responseyes=0x7f050029;
+        public static final int feedbackmessagesubject_format=0x7f05002b;
+        public static final int feedbackname=0x7f050008;
+        public static final int feedbackresponse=0x7f05000b;
+        public static final int feedbackresponsecheck=0x7f05000c;
+        public static final int feedbacktitle=0x7f050007;
+        public static final int feedbacktype=0x7f05000e;
+        public static final int feedbacktype1=0x7f05000f;
+        public static final int feedbacktype2=0x7f050010;
+        public static final int feedbacktype3=0x7f050011;
+        public static final int feedbacktype4=0x7f050012;
+        public static final int hello=0x7f050005;
+        public static final int invite_activity_title=0x7f050021;
+        public static final int invite_email_hint=0x7f050024;
+        public static final int invite_email_label=0x7f05001f;
+        public static final int invite_message_preview_title=0x7f05001e;
+        public static final int invitetype1=0x7f050025;
+        public static final int invitetype2=0x7f050026;
+        public static final int invitetype3=0x7f050027;
+        public static final int invitetypeprompt=0x7f050023;
+        public static final int message_preview=0x7f050022;
         /**  
 	
 		TITLE: General purpose Strings
@@ -131,10 +138,13 @@ public final class R {
 
 	
          */
-        public static final int tabs_1_tab_1=0x7f050000;
-        public static final int tabs_1_tab_2=0x7f050001;
-        public static final int tabs_1_tab_3=0x7f050002;
-        public static final int transactionAmountLabel=0x7f05002c;
+        public static final int overview=0x7f050000;
+        public static final int pick_email_label=0x7f050020;
+        public static final int tabs_1_tab_1=0x7f050001;
+        public static final int tabs_1_tab_2=0x7f050002;
+        public static final int tabs_1_tab_3=0x7f050003;
+        public static final int tabs_1_tab_4=0x7f050004;
+        public static final int transactionAmountLabel=0x7f05002e;
         /**  
      	
      	  TITLE: "New Transaction" Strings
@@ -143,9 +153,9 @@ public final class R {
      
      
          */
-        public static final int transactionCategoryLabel=0x7f05002a;
-        public static final int transactionNameLabel=0x7f05002b;
-        public static final int transactionSave=0x7f05002d;
+        public static final int transactionCategoryLabel=0x7f05002c;
+        public static final int transactionNameLabel=0x7f05002d;
+        public static final int transactionSave=0x7f05002f;
     }
     public static final class style {
         public static final int FinancoidMainTheme=0x7f060000;
