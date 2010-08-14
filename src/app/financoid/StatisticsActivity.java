@@ -1,10 +1,12 @@
 package app.financoid;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 
 public class StatisticsActivity extends Activity {
-
+	
+	private IChart[] mCharts = new IChart[] {new BudgetPieChart()};
 	/*
 	 * FUNCTION: public void onCreate(Bundle savedInstanceState)
 	 * 
@@ -21,6 +23,15 @@ public class StatisticsActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.statistics_overview);
+        
+        Intent intent = null;
+        
+		intent = mCharts[0].execute(this);
+        startActivity(intent);
+        /*Intent intent = null;
+        intent = new Intent(this, BudgetPieChart.class);
+        
+        startActivity(intent);*/
     }
 	
 }

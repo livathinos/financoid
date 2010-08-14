@@ -78,4 +78,22 @@
      <string name="transactionAmountLabel">Amount</string>
      <string name="transactionSave">Save Transaction</string>
      
+     <string name="export_header">Export data</string>
+     <string name="exporting_title">Export database</string>
+     <string name="exporting">Exporting...</string>
+     <string name="save_as">Save as</string>
+     <string name="filename">Filename</string>
+     <string name="csv_file">CSV File</string>
+     <string name="restore_database">Restore Database</string>
+     <string name="sql_file">SQL File</string>
+     <string name="sqlite">SQL Lite</string>
+     <string name="import_header">Import</string>
+     <string name="confirm_erase">Are you sure you want to erase this transaction?</string>
+     <string name="erase">Erase</string>
+     <string name="backup_restored">Backup restored</string>
+     <string name="backup_restored_msg">Backup restored</string>
+     <string name="export_finished_msg">Export finished</string>
+     <string name="success">Exporting your data was successful</string>
+     <string name="error">An error has occured</string>
+     
 </resources>

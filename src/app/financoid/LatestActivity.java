@@ -1,24 +1,19 @@
 package app.financoid;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
 
 import android.app.Activity;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.text.format.DateFormat;
 import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.SimpleCursorAdapter;
 
 public class LatestActivity extends Activity {
     
 	private ListView ovListView;
-	private DateFormat ovDateFormatter = null;
 	
 	public static final String KEY_TITLE="transaction_title";
 	public static final String KEY_VALUE="transaction_value";
@@ -45,7 +40,7 @@ public class LatestActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.overview);
+        setContentView(R.layout.latest_transactions);
         
         dbConn = connectToDb();
         

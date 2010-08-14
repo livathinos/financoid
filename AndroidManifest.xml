@@ -14,7 +14,6 @@
         </activity>
         <activity android:name="OverviewActivity"
         		  android:theme="@android:style/Theme.NoTitleBar"></activity>
-        <activity android:name="ExportActivity"></activity>
         <activity android:name="FormActivity"
         		  android:theme="@style/FinancoidMainTheme"></activity>
         <activity android:name="NewTransactionActivity"
@@ -24,8 +23,18 @@
         <activity android:name="SettingsActivity"
         		  android:theme="@style/FinancoidMainTheme"></activity>
         <activity android:name="StatisticsActivity"
-        		  android:theme="@style/FinancoidMainTheme"></activity>
+        		  android:theme="@android:style/Theme.NoTitleBar"></activity>
        	<activity android:name="LatestActivity"
+       			  android:theme="@android:style/Theme.NoTitleBar"></activity>
+       	<activity android:name="org.achartengine.GraphicalActivity"
+       			  android:theme="@android:style/Theme.NoTitleBar"></activity>
+       	<activity android:name="ExportActivity"
+       			  android:theme="@android:style/Theme.NoTitleBar"></activity>
+       	<activity android:name="CSVView"
+       			  android:theme="@android:style/Theme.NoTitleBar"></activity>
+       	<activity android:name="SQLView"
+       			  android:theme="@android:style/Theme.NoTitleBar"></activity>
+       	<activity android:name="SQLLiteView"
        			  android:theme="@android:style/Theme.NoTitleBar"></activity>
         <!--<activity android:name="InviteActivity"></activity>-->
 

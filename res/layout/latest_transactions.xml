@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<TableLayout
+		android:id="@+id/widget38"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:orientation="vertical"
+		xmlns:android="http://schemas.android.com/apk/res/android"
+	>
+	
+	<TextView
+		android:id="@+id/widget32"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="Today's transactions"
+		android:textColor="#2E3235"
+		android:textSize="20dp"
+		android:textStyle="bold"
+		android:paddingTop="5dp"
+	>
+	</TextView>
+	
+	<ListView
+		android:layout_weight="1"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:id="@android:id/list"
+		android:choiceMode="singleChoice"
+		android:fastScrollEnabled="true"
+		android:textColor="#000000"
+	/>
+	<RadioGroup
+		android:id="@+id/widget31"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+	>
+	</RadioGroup>
+	
+</TableLayout>

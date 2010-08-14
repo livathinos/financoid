@@ -10,15 +10,18 @@
  
      <TextView android:id="@+id/TRANS_TITLE"
          android:layout_width="150dip"
-         android:layout_height="wrap_content"/>
+         android:layout_height="wrap_content"
+         android:textColor="#2E3235"/>
  
      <TextView android:id="@+id/TRANS_VALUE"
          android:layout_width="30dip"
-         android:layout_height="wrap_content" android:layout_weight="1"/>
+         android:layout_height="wrap_content" android:layout_weight="1"
+         android:textColor="#7F7F7F"/>
  
      <TextView android:id="@+id/TRANS_CATEGORY"
          android:layout_width="100dip"
-         android:layout_height="wrap_content"  android:layout_weight="1"/>
+         android:layout_height="wrap_content"  android:layout_weight="1"
+         android:textColor="#2E3235"/>
          
      <!--<TextView android:id="@+id/TRANS_DATE"
      	 android:layout_width="40dip"
