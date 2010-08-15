@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
 
+<resources>
+<!--
 	<drawable name="black">#000000</drawable>
 	<drawable name="white">#ffffff</drawable>
 	<drawable name="gray">#CCCCCC</drawable>
-
+	<drawable name="progress_start">#0c7d14</drawable>
+	<drawable name="progress_end">#17ab0f</drawable>
+-->
 </resources>

@@ -7,7 +7,42 @@
 		android:orientation="vertical"
 		xmlns:android="http://schemas.android.com/apk/res/android"
 	>
-	
+	<TextView
+		android:id="@+id/abHeader"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="Account balance"
+		android:textColor="#2E3235"
+		android:textSize="20dp"
+		android:textStyle="bold"
+		android:paddingTop="2dp"
+		android:background="@drawable/divider_gray"
+		></TextView>
+	<ProgressBar
+		android:id="@+id/abProgressBar"
+		android:paddingLeft="5dp"
+		android:paddingRight="5dp"
+		style="?android:attr/progressBarStyleHorizontal"></ProgressBar>
+	<TextView
+		android:id="@+id/abIncome"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="Total income: 1000€"
+		android:textColor="#2E3235"
+		android:textSize="11dp"
+		android:textStyle="normal"
+		android:paddingTop="1dp"
+		android:paddingLeft="5dp"></TextView>
+		
+	<TextView
+		android:id="@+id/abExpenditure"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:textColor="#2E3235"
+		android:text="Total expenses: 700€"
+		android:textSize="11dp"
+		android:paddingTop="1dp"
+		android:paddingLeft= "5dp"></TextView>
 	<TextView
 		android:id="@+id/widget32"
 		android:layout_width="wrap_content"
@@ -19,6 +54,41 @@
 		android:paddingTop="5dp"
 	>
 	</TextView>
+	<ProgressBar
+		android:id="@+id/mbProgressBar"
+		android:paddingLeft="5dp"
+		android:paddingRight="5dp"
+		style="?android:attr/progressBarStyleHorizontal"></ProgressBar>
+			<TextView
+		android:id="@+id/mbIncome"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="Monthly income: 1000€"
+		android:textColor="#2E3235"
+		android:textSize="11dp"
+		android:textStyle="normal"
+		android:paddingTop="1dp"
+		android:paddingLeft="5dp"></TextView>
+		
+	<TextView
+		android:id="@+id/mbExpenditure"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:textColor="#2E3235"
+		android:text="Monthly expenses: 400€"
+		android:textSize="11dp"
+		android:paddingTop="1dp"
+		android:paddingLeft= "5dp"></TextView>
+		
+	<TextView
+		android:id="@+id/listHeader"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="Last transactions"
+		android:textColor="#2E3235"
+		android:textSize="20dp"
+		android:textStyle="bold"
+		android:paddingTop="2dp"></TextView>
 	
 	<ListView
 		android:layout_weight="1"

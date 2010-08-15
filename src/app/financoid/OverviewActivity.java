@@ -1,24 +1,33 @@
 package app.financoid;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
 
 import android.app.Activity;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.text.format.DateFormat;
 import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
+import android.widget.ProgressBar;
 import android.widget.SimpleCursorAdapter;
 
 public class OverviewActivity extends Activity {
     
 	private ListView ovListView;
-	private DateFormat ovDateFormatter = null;
+	/*private DateFormat ovDateFormatter = null;
+	
+	private static final String abHeader = "Account balance";
+	private static final String abIncome = "Income";
+	private static final String abExpenditure = "Expenditure";
+	private static final String abRemaining = "Remaining";
+	private static final String abStatus = "Status";
+	
+	private static final String mbHeader = "Monthly balance";
+	private static final String mbIncome = "Income";
+	private static final String mbExpenditure = "Expenditure";
+	private static final String mbRemaining = "Remaining";
+	private static final String mbStatus = "Status";*/
 	
 	public static final String KEY_TITLE="transaction_title";
 	public static final String KEY_VALUE="transaction_value";
@@ -29,6 +38,17 @@ public class OverviewActivity extends Activity {
 	
 	private SQLiteDatabase dbConn;
 	private Cursor balanceCursor;
+	
+	//private static final int PROGRESS = 0x1;
+	private ProgressBar abProgress;
+	private int abProgressStatus = 0;
+	
+	//private Handler abHandler = new Handler();
+	
+	private ProgressBar mbProgress;
+	private int mbProgressStatus = 0;
+	
+	//private Handler mbHandler = new Handler();
 	
 	/*
 	 * FUNCTION: public void onCreate(Bundle savedInstanceState)
@@ -49,6 +69,9 @@ public class OverviewActivity extends Activity {
         
         dbConn = connectToDb();
         
+        displayAccountBalance();
+        displayMonthlyBudgetFlow();
+        
         ovListView = (ListView) findViewById(android.R.id.list);
 
         balanceCursor = getBalanceList();
@@ -67,7 +90,7 @@ public class OverviewActivity extends Activity {
     }
     
     /*
-     * FUNCTION: public void displayMonthlyExpenses()
+     * FUNCTION: public void displayAccountBalance()
      * 
      * DESCRIPTION: Displays this month's expenses total.
      * 
@@ -76,7 +99,15 @@ public class OverviewActivity extends Activity {
      * 
      * 
      */
-    public void displayMonthlyExpenses() {
+    public void displayAccountBalance() {
+    	
+    	abProgress = (ProgressBar) findViewById(R.id.abProgressBar);
+        abProgressStatus = 70;
+        abProgress.setMax(100);
+        
+        abProgress.setProgressDrawable(getResources().getDrawable(R.drawable.ab_progress_layout));
+        abProgress.setIndeterminate(false);
+        abProgress.setProgress(abProgressStatus);
     	
     }
     
@@ -90,34 +121,28 @@ public class OverviewActivity extends Activity {
      * 
      * 
      */
-    public void displayMonthlyBalance() {
+    public void displayMonthlyBudgetFlow() {
     	
-    	
+    	mbProgress = (ProgressBar) findViewById(R.id.mbProgressBar);
+        mbProgressStatus = 40;
+        mbProgress.setMax(100);
+        
+        mbProgress.setProgressDrawable(getResources().getDrawable(R.drawable.mb_progress_layout));
+        mbProgress.setIndeterminate(false);
+        mbProgress.setProgress(mbProgressStatus);
+        
     }
     
     /*
-     * FUNCTION: public void displayRecent()
+     * FUNCTION: public void displayLastTransaction()
      * 
-     * DESCRIPTION: Displays the 3 most recent transactions
+     * DESCRIPTION: Displays the last transaction made
      * 
      * 		INPUTS: (none)
      * 		OUTPUTS: (none)
      * 
      */
-    public void displayRecent() {
-    	
-    }
-    
-    /*
-     * FUNCTION: public void displayMostFrequent()
-     * 
-     * DESCRIPTION: Displays most frequent transactions
-     * 
-     * 		INPUTS: (none)
-     * 		OUTPUTS: (none)
-     * 
-     */
-    public void displayMostFrequent() {
+    public void displayLastTransaction() {
     	
     }
     
