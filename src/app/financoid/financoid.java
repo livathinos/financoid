@@ -40,16 +40,17 @@ public class Financoid extends TabActivity {
         
         tabHost.addTab(tabHost.newTabSpec("tab1")
         		.setIndicator("Overview",getResources().getDrawable(R.drawable.cloud))
-                //.setContent(R.id.view1));
         		.setContent(new Intent(this, OverviewActivity.class)));
         tabHost.addTab(tabHost.newTabSpec("tab2")
                 .setIndicator("Today", getResources().getDrawable(R.drawable.barcode))
-                //.setContent(R.id.view2));
         		.setContent(new Intent(this, LatestActivity.class)));
         tabHost.addTab(tabHost.newTabSpec("tab3")
         		.setIndicator("Statistics", getResources().getDrawable(R.drawable.chart))
-                //.setContent(R.id.view3));
         		.setContent(new Intent(this, StatisticsActivity.class)));
+        tabHost.addTab(tabHost.newTabSpec("tab4")
+        		.setIndicator("Budgets", getResources().getDrawable(R.drawable.chart))
+        		.setContent(new Intent(this, BudgetsActivity.class)));
+        
     }
     
     /*

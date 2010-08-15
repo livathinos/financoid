@@ -71,10 +71,10 @@ public final class R {
         public static final int EditTextName=0x7f08000d;
         public static final int ScrollView01=0x7f08000b;
         public static final int SpinnerFeedbackType=0x7f08000f;
-        public static final int TRANS_CATEGORY=0x7f080003;
-        public static final int TRANS_DATE=0x7f080002;
+        public static final int TRANS_CATEGORY=0x7f080001;
+        public static final int TRANS_DATE=0x7f080003;
         public static final int TRANS_TITLE=0x7f080000;
-        public static final int TRANS_VALUE=0x7f080001;
+        public static final int TRANS_VALUE=0x7f080002;
         public static final int TextViewTitle=0x7f08000c;
         public static final int abExpenditure=0x7f08001d;
         public static final int abHeader=0x7f08001a;

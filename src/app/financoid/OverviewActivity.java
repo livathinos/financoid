@@ -115,7 +115,7 @@ public class OverviewActivity extends Activity {
 		}
          */
         SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, R.layout.balance_row, balanceCursor,
-                new String[] {"transaction_title", "transaction_value", "transaction_date"}, new int[] { R.id.TRANS_TITLE, R.id.TRANS_VALUE, R.id.TRANS_DATE});
+                new String[] {"transaction_title", "transaction_value", "transaction_category", "transaction_date"}, new int[] { R.id.TRANS_TITLE, R.id.TRANS_VALUE, R.id.TRANS_CATEGORY, R.id.TRANS_DATE});
         
         adapter.setViewBinder(m_viewBinder);
         
@@ -231,6 +231,16 @@ public class OverviewActivity extends Activity {
 
     }//end of function connectToDb()
     
+    /*
+     * CONSTRUCTOR: private SimpleCursorAdapter
+     * 
+     * DESCRIPTION: constructor of a SimpleCursorAdapter object instance to extract all the
+     * 				necessary information from the transactions tables.
+     * 
+     * 		INPUTS: (none)
+     * 		OUTPUTS: boolean true/false
+     * 
+     */
     private SimpleCursorAdapter.ViewBinder m_viewBinder = new SimpleCursorAdapter.ViewBinder() {
 		public boolean setViewValue(View view, Cursor cursor, int columnIndex) {
 			
@@ -252,10 +262,10 @@ public class OverviewActivity extends Activity {
 					f_dateFormatter = android.text.format.DateFormat.getMediumDateFormat(OverviewActivity.this);
 				}
 				text = f_dateFormatter.format(date);
-			} /*else if (columnIndex == COL_CATEGORY) {
+			} else if (columnIndex == COL_CATEGORY) {
 				String category = cursor.getString(columnIndex);
 				text = category;
-			}*/
+			}
 			textview.setText(text);
 			return true;
 		}
