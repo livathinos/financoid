@@ -1,33 +1,26 @@
 package app.financoid;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import android.app.Activity;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.SimpleCursorAdapter;
+import android.widget.TextView;
 
 public class OverviewActivity extends Activity {
-    
-	private ListView ovListView;
-	/*private DateFormat ovDateFormatter = null;
-	
-	private static final String abHeader = "Account balance";
-	private static final String abIncome = "Income";
-	private static final String abExpenditure = "Expenditure";
-	private static final String abRemaining = "Remaining";
-	private static final String abStatus = "Status";
-	
-	private static final String mbHeader = "Monthly balance";
-	private static final String mbIncome = "Income";
-	private static final String mbExpenditure = "Expenditure";
-	private static final String mbRemaining = "Remaining";
-	private static final String mbStatus = "Status";*/
 	
 	public static final String KEY_TITLE="transaction_title";
 	public static final String KEY_VALUE="transaction_value";
@@ -39,16 +32,24 @@ public class OverviewActivity extends Activity {
 	private SQLiteDatabase dbConn;
 	private Cursor balanceCursor;
 	
-	//private static final int PROGRESS = 0x1;
 	private ProgressBar abProgress;
 	private int abProgressStatus = 0;
 	
-	//private Handler abHandler = new Handler();
 	
 	private ProgressBar mbProgress;
 	private int mbProgressStatus = 0;
 	
-	//private Handler mbHandler = new Handler();
+	private PreferenceFactory f_prefs;
+	private ListView ovListView;
+	private DateFormat f_dateFormatter = null;
+	private Map<Long, Transaction> m_transactionMap;
+	
+	private int COL_ID = 0;
+	private int COL_TITLE = 1;
+	private int COL_VALUE = 2;
+	private int COL_CATEGORY = 4;
+	private int COL_DATE = 5;
+	
 	
 	/*
 	 * FUNCTION: public void onCreate(Bundle savedInstanceState)
@@ -69,6 +70,9 @@ public class OverviewActivity extends Activity {
         
         dbConn = connectToDb();
         
+        f_prefs = PreferenceFactory.getInstance(this);
+        setDefaultKeyMode(DEFAULT_KEYS_SHORTCUT);
+
         displayAccountBalance();
         displayMonthlyBudgetFlow();
         
@@ -76,10 +80,45 @@ public class OverviewActivity extends Activity {
 
         balanceCursor = getBalanceList();
         this.startManagingCursor(this.balanceCursor);
+        final String[] PROJECTION = Transaction.getProjection();
+        
+        /*Cursor latestCursor = managedQuery(Transaction.CONTENT_URI, PROJECTION, null, null, Transaction.DEFAULT_SORT_ORDER);
+		if (latestCursor.getCount() > 0) {
+			latestCursor.moveToFirst();
+			
+			double total_amount = 0D;
+			
+			COL_TITLE = latestCursor.getColumnIndex(Transaction.TITLE);
+			COL_VALUE = latestCursor.getColumnIndex(Transaction.VALUE);
+			COL_CATEGORY = latestCursor.getColumnIndex(Transaction.CATEGORY);
+			COL_DATE = latestCursor.getColumnIndex(Transaction.DATE);
 
-        ListAdapter adapter = new SimpleCursorAdapter(this, R.layout.balance_row, balanceCursor,
-                new String[] {"transaction_title", "transaction_value", "transaction_category"}, new int[] { R.id.TRANS_TITLE, R.id.TRANS_VALUE, R.id.TRANS_CATEGORY});
+			List<Transaction> transactions = new ArrayList<Transaction>();
+			m_transactionMap = new HashMap<Long, Transaction>();
+			int numTransactions = latestCursor.getCount();
+			while (latestCursor.isAfterLast() == false) {
+				Transaction f = new Transaction(latestCursor);
 
+				transactions.add(0, f);
+
+				m_transactionMap.put(f.getId(), f);
+
+				if (transactions.size() < numTransactions) {
+					total_amount += f.getAmount();
+				}
+
+				latestCursor.moveToNext();
+			}
+
+			//total_distance = fillups.get(fillups.size() - 1).getOdometer() - fillups.get(0).getOdometer();
+			//m_avgMpg = m_calcEngine.calculateEconomy(total_distance, total_fuel);
+		}
+         */
+        SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, R.layout.balance_row, balanceCursor,
+                new String[] {"transaction_title", "transaction_value", "transaction_date"}, new int[] { R.id.TRANS_TITLE, R.id.TRANS_VALUE, R.id.TRANS_DATE});
+        
+        adapter.setViewBinder(m_viewBinder);
+        
         ovListView.setAdapter(adapter);
 
         /*
@@ -192,6 +231,35 @@ public class OverviewActivity extends Activity {
 
     }//end of function connectToDb()
     
+    private SimpleCursorAdapter.ViewBinder m_viewBinder = new SimpleCursorAdapter.ViewBinder() {
+		public boolean setViewValue(View view, Cursor cursor, int columnIndex) {
+			
+			String text = null;
+			TextView textview = (TextView) view;
+			if (textview == null) {
+				return false;
+			}
+			if (columnIndex == COL_TITLE) {
+				String title = cursor.getString(columnIndex);
+				text = title;
+			} else if (columnIndex == COL_VALUE) {
+				double amount = cursor.getDouble(columnIndex);
+				text = f_prefs.getCurrency() + amount;
+			} else if (columnIndex == COL_DATE) {
+				long time = cursor.getLong(columnIndex);
+				Date date = new Date(time);
+				if (f_dateFormatter == null) {
+					f_dateFormatter = android.text.format.DateFormat.getMediumDateFormat(OverviewActivity.this);
+				}
+				text = f_dateFormatter.format(date);
+			} /*else if (columnIndex == COL_CATEGORY) {
+				String category = cursor.getString(columnIndex);
+				text = category;
+			}*/
+			textview.setText(text);
+			return true;
+		}
+	};
   
     
 }//end of class OverviewActivity

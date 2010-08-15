@@ -12,26 +12,18 @@
          android:layout_width="150dip"
          android:layout_height="wrap_content"
          android:textColor="#2E3235"
-         android:textSize="13dp"/>
+         android:textSize="15dp"/>
  
      <TextView android:id="@+id/TRANS_VALUE"
          android:layout_width="20dip"
          android:layout_height="wrap_content" android:layout_weight="1"
          android:textColor="#7F7F7F"
-         android:textSize="15dp"
-         android:textStyle="bold"/>
+         android:textSize="10dp"/>
  
-     <!--<TextView android:id="@+id/TRANS_CATEGORY"
+     <TextView android:id="@+id/TRANS_CATEGORY"
          android:layout_width="60dip"
          android:layout_height="wrap_content"  android:layout_weight="1"
          android:textColor="#2E3235"
-         android:textSize="10dp"/>-->
-         
-     <TextView android:id="@+id/TRANS_DATE"
-     	 android:layout_width="30dip"
-     	 android:layout_height="wrap_content" 
-     	 android:layout_weight="1"
-     	 android:textSize="12dp"
-     	 android:textColor="#2E3235"/>
+         android:textSize="10dp"/>
      	 
 </LinearLayout>

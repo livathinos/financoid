@@ -1,5 +1,7 @@
 package app.financoid;
 import java.io.*;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import android.app.Activity;
 import android.database.Cursor;
@@ -32,6 +34,8 @@ public class NewTransactionActivity extends Activity {
     
     public static final String KEY_TITLE = "category_name";
     public static final String KEY_ROWID = "_id";
+    
+    private Calendar m_date = GregorianCalendar.getInstance();
     
 	/*
 	 * FUNCTION: public void onCreate(Bundle savedInstanceState)
@@ -86,6 +90,8 @@ public class NewTransactionActivity extends Activity {
             }
         });
         
+        
+        
         /*
          * TODO: Implement callback function to close the database connection once
          * 		 the activity is closed.
@@ -137,6 +143,7 @@ public class NewTransactionActivity extends Activity {
     	
         createTransactionEntry();
         finish();
+        dbConn.close();
     	
     }
     
@@ -156,12 +163,8 @@ public class NewTransactionActivity extends Activity {
     	String trans_name = mTransactionNameEditText.getText().toString();
         String trans_amount = mTransactionAmountEditText.getText().toString();
         
-        dbConn.execSQL("INSERT INTO " + TRANSACTION_TABLE + " (transaction_title, transaction_value, transaction_prefix, transaction_category, transaction_date)"
-				+ " VALUES ('" + trans_name + "', '" + trans_amount + "', '+', '" + trans_cat + "', datetime());");
-        /*dbConn.execSQL("INSERT INTO categories (category_name, category_description) VALUES ('Clothes', 'Money you spent on clothes and other wearable apparel');");
-        dbConn.execSQL("INSERT INTO categories (category_name, category_description) VALUES ('Entertainment', 'Money you spent on drinks/movies/theater or other places of entertainment');");
-        dbConn.execSQL("INSERT INTO categories (category_name, category_description) VALUES ('Books', 'Money you spent on books');");
-        dbConn.execSQL("INSERT INTO categories (category_name, category_description) VALUES ('Everyday purchases', 'Money you spent on everyday small things like cigarettes, news papers etc.');");*/
+        dbConn.execSQL("INSERT INTO " + TRANSACTION_TABLE + " (transaction_title, transaction_value, transaction_prefix, transaction_category, transaction_date, transaction_extra_date)"
+				+ " VALUES ('" + trans_name + "', '" + trans_amount + "', '+', '" + trans_cat + "', '" + m_date.getTimeInMillis() + "', datetime());");
     }
 
     
