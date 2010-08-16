@@ -3,9 +3,9 @@
 	<item android:id="@+id/menu_item_addnew"
 		  android:title="New transaction"
 		  android:icon="@drawable/create_contact"></item>
-	<item android:id="@+id/menu_item_statistics"
-		  android:title="Statistics"
-		  android:icon="@drawable/piechart"></item>
+	<item android:id="@+id/menu_item_account"
+		  android:title="Account Management"
+		  android:icon="@drawable/options"></item>
 	<item android:id="@+id/menu_item_export"
 		  android:title="Export data"
 		  android:icon="@drawable/cloud"></item>

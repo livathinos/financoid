@@ -92,7 +92,7 @@ public class Financoid extends TabActivity {
         	case R.id.menu_item_addnew: launchNewTransaction();
         								break;
         								
-        	case R.id.menu_item_statistics: launchStatistics();
+        	case R.id.menu_item_account: launchAccountManager();
         									break;
         									
         	case R.id.menu_item_export: launchExport();
@@ -155,10 +155,10 @@ public class Financoid extends TabActivity {
      * 
      * 
      */    
-    protected void launchStatistics() {
+    protected void launchAccountManager() {
     	
-    	Intent launchStatisticsActivity = new Intent(this, StatisticsActivity.class);
-    	startActivity(launchStatisticsActivity);
+    	Intent launchAccountActivity = new Intent(this, AccountActivity.class);
+    	startActivity(launchAccountActivity);
     	
     }
     

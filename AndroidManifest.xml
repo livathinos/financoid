@@ -38,6 +38,8 @@
        			  android:theme="@android:style/Theme.NoTitleBar"></activity>
        	<activity android:name="BudgetsActivity"
        			  android:theme="@android:style/Theme.NoTitleBar"></activity>
+       	<activity android:name="AccountActivity"
+       			  android:theme="@android:style/Theme.NoTitleBar"></activity>
         <!--<activity android:name="InviteActivity"></activity>-->
 
     </application>
