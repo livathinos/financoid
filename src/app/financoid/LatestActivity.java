@@ -101,7 +101,7 @@ public class LatestActivity extends Activity {
 		
 		return dbConn.query(tableName, new String[] { KEY_ROWID, KEY_TITLE, KEY_VALUE, KEY_PREFIX, KEY_CATEGORY, KEY_EXTRA_DATE, KEY_DATE},
         		dateQuery, 
-        		null, null, null, KEY_EXTRA_DATE);
+        		null, null, null, KEY_EXTRA_DATE + " DESC");
     }
 	
     /*
@@ -144,6 +144,16 @@ public class LatestActivity extends Activity {
 
     }//end of function connectToDb()
     
+    /*
+     * CONSTRUCTOR: private SimpleCursorAdapter
+     * 
+     * DESCRIPTION: constructor of a SimpleCursorAdapter object instance to extract all the
+     * 				necessary information from the transactions tables.
+     * 
+     * 		INPUTS: (none)
+     * 		OUTPUTS: boolean true/false
+     * 
+     */
     private SimpleCursorAdapter.ViewBinder m_viewBinder = new SimpleCursorAdapter.ViewBinder() {
 		public boolean setViewValue(View view, Cursor cursor, int columnIndex) {
 			

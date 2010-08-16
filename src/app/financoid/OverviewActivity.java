@@ -12,6 +12,7 @@ import android.app.Activity;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListAdapter;
@@ -27,6 +28,7 @@ public class OverviewActivity extends Activity {
 	public static final String KEY_PREFIX="transaction_prefix";
 	public static final String KEY_CATEGORY = "transaction_category";
 	public static final String KEY_DATE = "transaction_date";
+	public static final String KEY_EXTRA_DATE = "transaction_extra_date";
 	public static final String KEY_ROWID="_id";
 	
 	private SQLiteDatabase dbConn;
@@ -187,8 +189,9 @@ public class OverviewActivity extends Activity {
     
 	public Cursor getBalanceList() {
 		String tableName = "transactions";
+		String limitBy = "4";
 
-        return dbConn.query(tableName, new String[] { KEY_ROWID, KEY_TITLE, KEY_VALUE, KEY_PREFIX, KEY_CATEGORY, KEY_DATE}, null, null, null, null, KEY_DATE);
+        return dbConn.query(true, tableName, new String[] { KEY_ROWID, KEY_TITLE, KEY_VALUE, KEY_PREFIX, KEY_CATEGORY, KEY_DATE}, null, null, null, null, KEY_EXTRA_DATE+" DESC", limitBy);
     }
 	
     /*

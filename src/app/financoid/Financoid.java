@@ -5,6 +5,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TabHost;
@@ -34,21 +35,22 @@ public class Financoid extends TabActivity {
         //setContentView(R.layout.main_tabs);
         
         TabHost tabHost = getTabHost();
-        tabHost.setBackgroundDrawable(getResources().getDrawable(R.drawable.bg_white));
+        tabHost.setBackgroundColor(Color.BLACK);
+        //tabHost.setBackgroundDrawable(getResources().getDrawable(R.drawable.bg_white));
         
         LayoutInflater.from(this).inflate(R.layout.main_tabs, tabHost.getTabContentView(), true);
         
         tabHost.addTab(tabHost.newTabSpec("tab1")
-        		.setIndicator("Overview",getResources().getDrawable(R.drawable.cloud))
+        		.setIndicator("Overview",getResources().getDrawable(R.drawable.notes))
         		.setContent(new Intent(this, OverviewActivity.class)));
         tabHost.addTab(tabHost.newTabSpec("tab2")
-                .setIndicator("Today", getResources().getDrawable(R.drawable.barcode))
+                .setIndicator("Today", getResources().getDrawable(R.drawable.rss))
         		.setContent(new Intent(this, LatestActivity.class)));
         tabHost.addTab(tabHost.newTabSpec("tab3")
-        		.setIndicator("Statistics", getResources().getDrawable(R.drawable.chart))
+        		.setIndicator("Statistics", getResources().getDrawable(R.drawable.calculator))
         		.setContent(new Intent(this, StatisticsActivity.class)));
         tabHost.addTab(tabHost.newTabSpec("tab4")
-        		.setIndicator("Budgets", getResources().getDrawable(R.drawable.chart))
+        		.setIndicator("Budgets", getResources().getDrawable(R.drawable.tasks))
         		.setContent(new Intent(this, BudgetsActivity.class)));
         
     }
