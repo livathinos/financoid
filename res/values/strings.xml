@@ -96,4 +96,9 @@
      <string name="success">Exporting your data was successful</string>
      <string name="error">An error has occured</string>
      
+     <string name="accountHeaderLabel">Account management</string>
+     <string name="accountNameLabel">Account name</string>
+     <string name="accountBalanceLabel">Total account balance</string>
+     <string name="accountMonthlyBudgetLabel">Monthly budget</string>
+     
 </resources>

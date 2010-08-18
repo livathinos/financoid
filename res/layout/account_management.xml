@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_white">
+    <TableLayout android:layout_width="match_parent"
+                 android:layout_height="match_parent">
+        <TableRow>
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text="@string/accountHeaderLabel"
+                      android:textStyle="bold"
+                      android:textSize="25dp"
+                      android:paddingTop="2dp"
+                      android:paddingBottom="2dp"
+                      android:textColor="#2E3235"/>
+        </TableRow>
+        <TableRow>
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text="@string/accountNameLabel"
+                      android:paddingTop="2dp"
+                      android:paddingBottom="2dp"
+                      android:textColor="#2E3235"/>
+        </TableRow>
+        <TableRow>
+            <EditText android:id="@+id/accountNameEditText"
+                      android:layout_height="wrap_content"
+                      android:layout_width="wrap_content"
+                      android:layout_weight="1"/>
+        </TableRow>
+        <!--<TableRow>
+            <Spinner android:layout_height="wrap_content"
+                     android:layout_width="match_parent"
+                     android:layout_weight="1"
+                     android:id="@+id/account"/>
+        </TableRow>-->
+        <TableRow>
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text="@string/accountBalanceLabel"
+                      android:paddingTop="2dp"
+                      android:paddingBottom="2dp"
+                      android:textColor="#2E3235"/>
+        </TableRow>
+        <TableRow>
+            <EditText android:id="@+id/accountBalanceEditText"
+                      android:layout_height="wrap_content"
+                      android:layout_width="wrap_content"
+                      android:layout_weight="1"/>
+        </TableRow>
+        <TableRow>
+            <TextView android:text="@string/accountMonthlyBudgetLabel"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+					  android:paddingTop="2dp"
+                      android:paddingBottom="2dp"
+                      android:textColor="#2E3235"/>
+        </TableRow>
+        <TableRow>
+            <EditText android:id="@+id/accountMonthlyBudgetEditText"
+                      android:layout_height="wrap_content"
+                      android:layout_width="wrap_content"
+                      android:layout_weight="1"/>
+            <!--<Spinner android:id="@+id/transactionTypeSpinner"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"/>-->
+        </TableRow>
+        <TableRow>
+            <Button android:layout_height="wrap_content"
+                    android:text="Save"
+                    android:id="@+id/accountSaveButton"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:paddingTop="10dp"/>
+        </TableRow>
+    </TableLayout>
+</ScrollView>

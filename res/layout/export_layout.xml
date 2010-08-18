@@ -34,7 +34,7 @@
 			    android:gravity="left|center_vertical"
 			    android:singleLine="true"
 			    android:text="@string/export_header"
-			    android:textSize="30dp"
+			    android:textSize="25dp"
 			    android:textStyle="bold"
 			    android:textColor="#2E3235"
 			/>
