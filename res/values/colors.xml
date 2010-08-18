@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
-<!--
-	<drawable name="black">#000000</drawable>
-	<drawable name="white">#ffffff</drawable>
-	<drawable name="gray">#CCCCCC</drawable>
-	<drawable name="progress_start">#0c7d14</drawable>
-	<drawable name="progress_end">#17ab0f</drawable>
--->
+
+	<color name="black">#000000</color>
+	<color name="white">#ffffff</color>
+	<color name="gray">#CCCCCC</color>
+	<color name="progress_start">#0c7d14</color>
+	<color name="progress_end">#17ab0f</color>
+	<color name="balance_green">#357F0F</color>
+	<color name="balance_red">#9F1D1D</color>
+
 </resources>

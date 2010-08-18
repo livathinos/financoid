@@ -4,4 +4,14 @@
     <item name="android:windowBackground">@drawable/bg_white</item>
     <item name="android:textColor">#000000</item>
 </style>
+
+<style name="BalanceGreenText">
+	<item name="android:textStyle">bold</item>
+	<item name="android:textColor">#357F0F</item>
+</style>
+
+<style name="BalanceRedText">
+	<item name="android:textStyle">bold</item>
+	<item name="android:textColor">#9F1D1D</item>
+</style>
 </resources>

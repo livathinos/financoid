@@ -2,8 +2,12 @@ package app.financoid;
 
 import java.io.IOException;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +18,10 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.StyleSpan;
+import android.text.style.TextAppearanceSpan;
 import android.view.View;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -60,8 +68,11 @@ public class OverviewActivity extends Activity {
 	private TextView ovMonthlyBalanceRate;
 	private TextView ovAccountBalanceSpent;
 	private TextView ovMonthlyBalanceSpent;
+	private TextView ovMonthlyBalanceOverdrawn;
+	private TextView ovAccountBalanceOverdrawn;
 	
 	private DateFormat f_dateFormatter = null;
+	private Calendar m_date = GregorianCalendar.getInstance();
 	private Map<Long, Transaction> m_transactionMap;
 	
 	private int COL_ID = 0;
@@ -79,16 +90,19 @@ public class OverviewActivity extends Activity {
 	private double accountBalance;
 	private double accountBalanceRemaining;
 	private double accountBalanceRate;
-	private double monthlyBudget;
-	private double monthlyBudgetRemaining;
-	private double monthlyBudgetRate;
+	private double monthlyBalance;
+	private double monthlyBalanceRemaining;
+	private double monthlyBalanceRate;
 	private double moneySpent;
-	private double moneySpentMonth;
+	private double moneyMonthlySpent;
 	
-	private double totalMoneySpent;
-	private double totalMoneySpentMonth;
+	private double tmpDouble;
+	
+	public int numTransactions = 0;
+	public int numTransactionsThisMonth = 0;
 	
 	private String TABLE_ACCOUNTS = "accounts";
+	private String TABLE_TRANSACTIONS = "transactions";
 	
 	
 	/*
@@ -117,7 +131,7 @@ public class OverviewActivity extends Activity {
         
         ovAccountBalance = (TextView) findViewById(R.id.abBalance);
         ovAccountBalanceRemaining = (TextView) findViewById(R.id.abBalanceRemaining);
-        ovAccountBalanceRate = (TextView) findViewById(R.id.abBalanceRate);
+        //ovAccountBalanceRate = (TextView) findViewById(R.id.abBalanceRate);
         ovAccountBalanceSpent = (TextView) findViewById(R.id.abBalanceSpent);
         
         ovMonthlyBalance = (TextView) findViewById(R.id.mbBalance);
@@ -132,33 +146,87 @@ public class OverviewActivity extends Activity {
     }
     
     public void populateBalanceFields() {
+    	String dateQuery = "(strftime('%m') == strftime('%m',transaction_extra_date))";
     	
     	Cursor accCursor = dbConn.query(TABLE_ACCOUNTS, new String[] { KEY_ACC_NAME, KEY_ACC_BALANCE, KEY_ACC_MONTHLY, KEY_ACC_DATE, KEY_ACC_EXTRA_DATE }, null, null, null, null,null);
-   
+    	Cursor transCursor = dbConn.query(TABLE_TRANSACTIONS, new String [] {KEY_TITLE, KEY_VALUE, KEY_DATE, KEY_EXTRA_DATE}, null, null, null, null, null);
+    	Cursor transMonthCursor = dbConn.query(TABLE_TRANSACTIONS, new String [] {KEY_TITLE, KEY_VALUE, KEY_DATE, KEY_EXTRA_DATE}, dateQuery, null, null, null, null);
+    	
+		/*
+		 * Start using the transaction Cursor to be able to calculate values such as total money spent,
+		 * and money spent this month.
+		 * 
+		 */
+		if(transCursor.moveToFirst()) {
+			
+			moneySpent = getMoneySpent(transCursor);
+			ovAccountBalanceSpent.setText("Total expenses: Û" + doubleDecimalFormat(moneySpent));
+			
+		} else {
+			
+			ovAccountBalanceSpent.setText("");
+			
+		}
+		
+		if (transMonthCursor.moveToFirst()) {
+			
+			moneyMonthlySpent = getMoneyMonthlySpent(transMonthCursor);
+			ovMonthlyBalanceSpent.setText("Monthly expenses: Û" + doubleDecimalFormat(moneyMonthlySpent));
+			
+		} else {
+			
+			ovMonthlyBalanceSpent.setText("");
+			
+		}
+		
+		transCursor.close();
+		transMonthCursor.close();
+		
 		if (accCursor.moveToFirst()) {
 			accountBalance = accCursor.getDouble(accCursor.getColumnIndex("account_balance"));
 		
 		
 			accountBalance = getAccountBalance(accCursor);
-			monthlyBudget = getMonthlyBudget(accCursor);
+			monthlyBalance = getMonthlyBalance(accCursor);
 	    	
+	        /*
+	         * TODO: The text below should be using the preferencefactory to get the type of
+	         * 		 currency. At the time being it's hardcoded into the String which should be changed.
+	         */
+	        ovAccountBalance.setText("Account budget: Û" + accountBalance);
+	        ovMonthlyBalance.setText("Monthly budget: Û" + monthlyBalance);
+	        /*ovAccountBalance.setText("Account budget: Û" + accountBalance, TextView.BufferType.SPANNABLE);
+	        ovMonthlyBalance.setText("Monthly budget: Û" + monthlyBalance, TextView.BufferType.SPANNABLE);
+	        
+	        Spannable str_ab = (Spannable) ovAccountBalance.getText();
+	        Spannable str_mb = (Spannable) ovMonthlyBalance.getText();
+	        
+	        str_ab.setSpan(new StyleSpan(android.graphics.Typeface.BOLD), 0, str_ab.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+	        str_mb.setSpan(new StyleSpan(android.graphics.Typeface.BOLD), 17, str_mb.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+	        */
 	    	abProgress = (ProgressBar) findViewById(R.id.abProgressBar);
-	        abProgressStatus = 700;
+	        
+	    	/*
+	    	 * Cast moneySpent to a temporary variable to avoid trailing zeros
+	    	 * when doing -, +, / functions on its values later on.
+	    	 */
+	    	
+	    	abProgressStatus = (int) moneySpent;
+	        
 	        if (accountBalance == 0) 
 	        	abProgress.setMax(100);
 	        else
 	        	abProgress.setMax((int) accountBalance);
-	        
-	        ovAccountBalance.setText("Total account balance: Û" + accountBalance);
-	        ovMonthlyBalance.setText("Monthly budget: Û" + monthlyBudget);
 	        
 	        abProgress.setProgressDrawable(getResources().getDrawable(R.drawable.ab_progress_layout));
 	        abProgress.setIndeterminate(false);
 	        abProgress.setProgress(abProgressStatus);
 	        
 	        mbProgress = (ProgressBar) findViewById(R.id.mbProgressBar);
-	        mbProgressStatus = 100;
-	        mbProgress.setMax((int) monthlyBudget);
+	        
+	        mbProgressStatus = (int) moneyMonthlySpent;
+	        
+	        mbProgress.setMax((int) monthlyBalance);
 	        
 	        mbProgress.setProgressDrawable(getResources().getDrawable(R.drawable.mb_progress_layout));
 	        mbProgress.setIndeterminate(false);
@@ -169,6 +237,49 @@ public class OverviewActivity extends Activity {
 		}
 		
 		accCursor.close();
+		
+		/*
+		 * Set the amount remaining for the account balance and the monthly budget
+		 * Check whether the balance remaining values are positive or negative and
+		 * set their colors accordingly to represent a healthy and an overdrawn
+		 * account/monthly budget.
+		 * 
+		 */
+		accountBalanceRemaining = getAccountBalanceRemaining();
+		monthlyBalanceRemaining = getMonthlyBalanceRemaining();
+		
+		ovAccountBalanceRemaining.setText("Û" + doubleDecimalFormat(accountBalanceRemaining), TextView.BufferType.SPANNABLE);
+		ovMonthlyBalanceRemaining.setText("Û" + doubleDecimalFormat(monthlyBalanceRemaining), TextView.BufferType.SPANNABLE);
+		
+		Spannable str_ab = (Spannable) ovAccountBalanceRemaining.getText();
+        Spannable str_mb = (Spannable) ovMonthlyBalanceRemaining.getText();
+        
+        str_ab.setSpan(new StyleSpan(android.graphics.Typeface.BOLD), 0, str_ab.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        str_mb.setSpan(new StyleSpan(android.graphics.Typeface.BOLD), 0, str_mb.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        
+		if(accountBalanceRemaining < 0) {
+		
+			str_ab.setSpan(new ForegroundColorSpan(0xFF9F1D1D), 0, str_ab.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+			
+		} else {
+			
+			str_ab.setSpan(new ForegroundColorSpan(0xFF357F0F), 0, str_ab.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+			
+		}
+		
+		if(monthlyBalanceRemaining < 0) {
+			
+			str_mb.setSpan(new ForegroundColorSpan(0xFF9F1D1D), 0, str_mb.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+			
+		} else {
+			
+			str_mb.setSpan(new ForegroundColorSpan(0xFF357F0F), 0, str_mb.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+			
+		}
+        
+		monthlyBalanceRate = getMonthlyBalanceRate();
+		
+		ovMonthlyBalanceRate.setText("Spend rate/day: Û" + doubleDecimalFormat(monthlyBalanceRate));
 		
     }
     
@@ -189,10 +300,9 @@ public class OverviewActivity extends Activity {
     }
     
 	public Cursor getBalanceList() {
-		String tableName = "transactions";
 		String limitBy = "4";
 
-        return dbConn.query(true, tableName, new String[] { KEY_ROWID, KEY_TITLE, KEY_VALUE, KEY_PREFIX, KEY_CATEGORY, KEY_DATE}, null, null, null, null, KEY_EXTRA_DATE+" DESC", limitBy);
+        return dbConn.query(true, TABLE_TRANSACTIONS, new String[] { KEY_ROWID, KEY_TITLE, KEY_VALUE, KEY_PREFIX, KEY_CATEGORY, KEY_DATE}, null, null, null, null, KEY_EXTRA_DATE+" DESC", limitBy);
     }
 	
     
@@ -245,24 +355,25 @@ public class OverviewActivity extends Activity {
 		
 	}
 	
-	public double getMonthlyBudget(Cursor cur) {
+	public double getMonthlyBalance(Cursor cur) {
 		
-		monthlyBudget = cur.getDouble(cur.getColumnIndex("account_monthly_budget"));
+		monthlyBalance = cur.getDouble(cur.getColumnIndex("account_monthly_budget"));
 		
-		return monthlyBudget;
+		return monthlyBalance;
 		
 	}
 	
-	public double getAccountBalanceRemaining(Cursor cur) {
+	public double getAccountBalanceRemaining() {
 		
+		accountBalanceRemaining = accountBalance - moneySpent;
 		return accountBalanceRemaining;
 		
 	}
 	
-	public double getMonthlyBudgetRemaining(Cursor cur) {
+	public double getMonthlyBalanceRemaining() {
 		
-		
-		return monthlyBudgetRemaining;
+		monthlyBalanceRemaining = monthlyBalance - moneyMonthlySpent;
+		return monthlyBalanceRemaining;
 		
 	}
 	
@@ -273,35 +384,65 @@ public class OverviewActivity extends Activity {
 		
 	}
 	
-	public double getMonthlyBudgetRate(Cursor cur) {
+	public double getMonthlyBalanceRate() {
 		
+		double numMonthDays = m_date.DAY_OF_MONTH;
+		monthlyBalanceRate = moneyMonthlySpent/numMonthDays;
 		
-		return monthlyBudgetRate;
+		return monthlyBalanceRate;
 		
 	}
 	
 	public double getMoneySpent(Cursor cur) {
 		
+		/*
+		 * Get the transaction value of the first ever transaction. If there
+		 * are more, keep adding to the sum to get the total paid.
+		 * 
+		 */
+		moneySpent = cur.getDouble(cur.getColumnIndex("transaction_value"));
+		numTransactions++;
+		
+		while(cur.moveToNext()) {
+			
+			numTransactions++;
+			moneySpent += cur.getDouble(cur.getColumnIndex("transaction_value"));
+			
+		}
+		
 		return moneySpent; 
 		
 	}
 	
-	public double getMoneySpentMonth(Cursor cur) {
+	public double getMoneyMonthlySpent(Cursor cur) {
 		
-		return moneySpentMonth;
+		/*
+		 * Get the transaction value of the first transaction this month. If there
+		 * are more, keep adding to the sum to get the total paid this month.
+		 * 
+		 */
+		
+		moneyMonthlySpent = cur.getDouble(cur.getColumnIndex("transaction_value"));
+		numTransactionsThisMonth++;
+		
+		while(cur.moveToNext()) {
+			
+			numTransactionsThisMonth++;
+			moneyMonthlySpent += cur.getDouble(cur.getColumnIndex("transaction_value"));
+			
+		}
+		
+		return moneyMonthlySpent;
 		
 	}
 	
-	public double getTotalAccountMoneySpent(Cursor cur) {
+	public String doubleDecimalFormat(double num) {
 		
-		return totalMoneySpent;
+		NumberFormat numberFormat = DecimalFormat.getInstance();
+		numberFormat.setMaximumFractionDigits(2);
+		String formattedText = numberFormat.format(num);
 		
-	}
-	
-	public double getTotalMonthlyMoneySpent(Cursor cur) {
-		
-		return totalMoneySpentMonth;
-		
+		return formattedText;
 	}
 	
 	/*
