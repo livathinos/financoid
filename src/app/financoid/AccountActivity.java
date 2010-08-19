@@ -5,18 +5,15 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.SimpleCursorAdapter;
-import android.widget.Spinner;
-import android.widget.AdapterView.OnItemSelectedListener;
 
 /*
  * CONSTRUCTOR: public class AccountActivity [extends] Activity
@@ -46,8 +43,6 @@ public class AccountActivity extends Activity {
 	private final static String KEY_TITLE = "account_name";
 	private final static String KEY_BALANCE = "account_balance";
 	private final static String KEY_MONTHLY_BUDGET = "account_monthly_budget";
-	private final static String KEY_DATE = "account_date";
-	private final static String KEY_EXTRA_DATE = "account_extra_date";
 	
 	private Calendar m_date = GregorianCalendar.getInstance();
 	
@@ -106,8 +101,24 @@ public class AccountActivity extends Activity {
 	 * DESCRIPTION: [PLACEHOLDER]
 	 * 
 	 */
-	public void updateAccountSelection() {
+	public void accountUpdate() {
 		
+		ACC_NAME = mAccountNameEditText.getText().toString();
+	    ACC_BALANCE = mAccountBalanceEditText.getText().toString();
+	    ACC_MONTHLY_BUDGET = mMonthlyBudgetEditText.getText().toString();
+	    
+		ContentValues updateAccount = new ContentValues();
+	    updateAccount.put("account_name", ACC_NAME);
+	    updateAccount.put("account_balance", ACC_BALANCE);
+	    updateAccount.put("account_monthly_budget", ACC_MONTHLY_BUDGET);
+	    
+	    dbConn.update("accounts", updateAccount, "_id=?", new String[] {"1"});
+	       
+	}
+	
+	public boolean accountExists() {
+		
+		return true;
 	}
 	
 	/*
@@ -125,7 +136,11 @@ public class AccountActivity extends Activity {
 		
 		Log.v(TAG, "Save button clicked");
 		
-	    createAccountEntry();
+	    if (!accountExists())
+	    	createAccountEntry();
+	    else
+	    	accountUpdate();
+	    
 	    finish();
 	    dbConn.close();
 		

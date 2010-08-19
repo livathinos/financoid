@@ -4,26 +4,18 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import android.app.Activity;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Spannable;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
-import android.text.style.TextAppearanceSpan;
 import android.view.View;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.SimpleCursorAdapter;
@@ -45,11 +37,10 @@ public class OverviewActivity extends Activity {
 	public static final String KEY_ACC_MONTHLY = "account_monthly_budget";
 	public static final String KEY_ACC_DATE = "account_date";
 	public static final String KEY_ACC_EXTRA_DATE = "account_extra_date";
+	private static final int VISIBLE = 0;
 	
 	private SQLiteDatabase dbConn;
 	private Cursor balanceCursor;
-	private Cursor accBalanceCursor;
-	private Cursor accMonthlyCursor;
 	
 	private ProgressBar abProgress;
 	private int abProgressStatus = 0;
@@ -64,28 +55,20 @@ public class OverviewActivity extends Activity {
 	private TextView ovMonthlyBalance;
 	private TextView ovAccountBalanceRemaining;
 	private TextView ovMonthlyBalanceRemaining;
-	private TextView ovAccountBalanceRate;
+	//private TextView ovAccountBalanceRate;
 	private TextView ovMonthlyBalanceRate;
 	private TextView ovAccountBalanceSpent;
 	private TextView ovMonthlyBalanceSpent;
-	private TextView ovMonthlyBalanceOverdrawn;
-	private TextView ovAccountBalanceOverdrawn;
+	//private TextView ovMonthlyBalanceOverdrawn;
+	//private TextView ovAccountBalanceOverdrawn;
 	
 	private DateFormat f_dateFormatter = null;
-	private Calendar m_date = GregorianCalendar.getInstance();
-	private Map<Long, Transaction> m_transactionMap;
+	//private Calendar m_date = GregorianCalendar.getInstance();
 	
-	private int COL_ID = 0;
 	private int COL_TITLE = 1;
 	private int COL_VALUE = 2;
 	private int COL_CATEGORY = 4;
 	private int COL_DATE = 5;
-	
-	private int COL_ACC_ID = 0;
-	private int COL_ACC_NAME = 1;
-	private int COL_ACC_BALANCE = 2;
-	private int COL_ACC_MONTHLY = 3;
-	private int COL_ACC_DATE = 5;
 	
 	private double accountBalance;
 	private double accountBalanceRemaining;
@@ -95,8 +78,6 @@ public class OverviewActivity extends Activity {
 	private double monthlyBalanceRate;
 	private double moneySpent;
 	private double moneyMonthlySpent;
-	
-	private double tmpDouble;
 	
 	public int numTransactions = 0;
 	public int numTransactionsThisMonth = 0;
@@ -139,9 +120,26 @@ public class OverviewActivity extends Activity {
         ovMonthlyBalanceRate = (TextView) findViewById(R.id.mbBalanceRate);
         ovMonthlyBalanceSpent = (TextView) findViewById(R.id.mbBalanceSpent);
         
-        populateBalanceFields();
+        abProgress = (ProgressBar) findViewById(R.id.abProgressBar);
+        mbProgress = (ProgressBar) findViewById(R.id.mbProgressBar);
+        
+        abProgress.setProgressDrawable(getResources().getDrawable(R.drawable.ab_progress_layout));
+        mbProgress.setProgressDrawable(getResources().getDrawable(R.drawable.mb_progress_layout));
+        
+        //populateBalanceFields();
+        
+        //populateRecentTransactionList();
+        
+    }
+    
+    @Override
+    public void onResume() {
+    	
+    	populateBalanceFields();
         
         populateRecentTransactionList();
+        
+        super.onResume();
         
     }
     
@@ -195,16 +193,6 @@ public class OverviewActivity extends Activity {
 	         */
 	        ovAccountBalance.setText("Account budget: Û" + accountBalance);
 	        ovMonthlyBalance.setText("Monthly budget: Û" + monthlyBalance);
-	        /*ovAccountBalance.setText("Account budget: Û" + accountBalance, TextView.BufferType.SPANNABLE);
-	        ovMonthlyBalance.setText("Monthly budget: Û" + monthlyBalance, TextView.BufferType.SPANNABLE);
-	        
-	        Spannable str_ab = (Spannable) ovAccountBalance.getText();
-	        Spannable str_mb = (Spannable) ovMonthlyBalance.getText();
-	        
-	        str_ab.setSpan(new StyleSpan(android.graphics.Typeface.BOLD), 0, str_ab.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-	        str_mb.setSpan(new StyleSpan(android.graphics.Typeface.BOLD), 17, str_mb.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-	        */
-	    	abProgress = (ProgressBar) findViewById(R.id.abProgressBar);
 	        
 	    	/*
 	    	 * Cast moneySpent to a temporary variable to avoid trailing zeros
@@ -212,27 +200,27 @@ public class OverviewActivity extends Activity {
 	    	 */
 	    	
 	    	abProgressStatus = (int) moneySpent;
-	        
+	    	
 	        if (accountBalance == 0) 
 	        	abProgress.setMax(100);
 	        else
 	        	abProgress.setMax((int) accountBalance);
 	        
-	        abProgress.setProgressDrawable(getResources().getDrawable(R.drawable.ab_progress_layout));
+	        
 	        abProgress.setIndeterminate(false);
 	        abProgress.setProgress(abProgressStatus);
-	        
-	        mbProgress = (ProgressBar) findViewById(R.id.mbProgressBar);
 	        
 	        mbProgressStatus = (int) moneyMonthlySpent;
 	        
 	        mbProgress.setMax((int) monthlyBalance);
 	        
-	        mbProgress.setProgressDrawable(getResources().getDrawable(R.drawable.mb_progress_layout));
 	        mbProgress.setIndeterminate(false);
 	        mbProgress.setProgress(mbProgressStatus);
 			
 		} else {
+			
+			abProgressStatus = 40;
+			abProgress.setMax(100);
 			
 		}
 		
@@ -386,7 +374,7 @@ public class OverviewActivity extends Activity {
 	
 	public double getMonthlyBalanceRate() {
 		
-		double numMonthDays = m_date.DAY_OF_MONTH;
+		double numMonthDays = Calendar.DAY_OF_MONTH;
 		monthlyBalanceRate = moneyMonthlySpent/numMonthDays;
 		
 		return monthlyBalanceRate;

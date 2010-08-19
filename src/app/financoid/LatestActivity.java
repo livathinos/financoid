@@ -3,7 +3,6 @@ package app.financoid;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.util.Date;
-import java.util.Map;
 
 import android.app.Activity;
 import android.database.Cursor;
@@ -11,7 +10,6 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
@@ -32,9 +30,7 @@ public class LatestActivity extends Activity {
 	private PreferenceFactory f_prefs;
 	private ListView ovListView;
 	private DateFormat f_dateFormatter = null;
-	private Map<Long, Transaction> m_transactionMap;
 	
-	private int COL_ID = 0;
 	private int COL_TITLE = 1;
 	private int COL_VALUE = 2;
 	private int COL_CATEGORY = 4;
@@ -66,7 +62,6 @@ public class LatestActivity extends Activity {
 
         balanceCursor = getLatestList();
         this.startManagingCursor(this.balanceCursor);
-        final String[] PROJECTION = Transaction.getProjection();
         
         SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, R.layout.balance_row, balanceCursor,
                 new String[] {"transaction_title", "transaction_value", "transaction_category", "transaction_date"}, new int[] { R.id.TRANS_TITLE, R.id.TRANS_VALUE, R.id.TRANS_CATEGORY, R.id.TRANS_DATE});
