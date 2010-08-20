@@ -164,7 +164,47 @@ public class FinancoidOpenDb extends SQLiteOpenHelper{
 		@Override
 		public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 	 
-		}	 
+		}
+		
+	    /*
+	     * FUNCTION: public void connectToDb()
+	     * 
+	     * DESCRIPTION: Attempts to create the database from a sample located in the assets directory
+	     * 				if a database is not present.
+	     * 				If a database exists for this given emulator, it opens a connection with the DB.
+	     * 
+	     * 		INPUTS: (none)
+	     * 		OUTPUTS: SQLiteDatabase object
+	     * 
+	     * 
+	     */
+	    public static SQLiteDatabase connectToDb(Context context, SQLiteDatabase dbConn) {
+	    	
+	    	FinancoidOpenDb dbHelper = new FinancoidOpenDb(context);
+	    	try {
+	    		 
+		        	dbHelper.createDataBase();
+		 
+		 	} catch (IOException ioe) {
+		 
+		 		throw new Error("Unable to create database");
+		 
+		 	}
+		 
+		 	try {
+		 
+		 		dbConn = dbHelper.openDataBase();
+		 
+		 	}catch(SQLException sqle){
+		 
+		 		throw sqle;
+		 
+		 	}
+		 	
+		 	return dbConn;
+
+
+	    }//end of function connectToDb()
 	}
 
 

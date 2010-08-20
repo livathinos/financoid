@@ -1,13 +1,11 @@
 package app.financoid;
 
-import java.io.IOException;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import android.app.Activity;
 import android.content.ContentValues;
 import android.database.Cursor;
-import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
@@ -64,7 +62,7 @@ public class AccountActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.account_management);
         
-        dbConn = connectToDb();
+        dbConn = FinancoidOpenDb.connectToDb(this, dbConn);
         
         // Obtain handles to UI objects
         mAccountNameEditText = (EditText) findViewById(R.id.accountNameEditText);
@@ -166,48 +164,5 @@ public class AccountActivity extends Activity {
 	    dbConn.execSQL("INSERT INTO " + TABLE_NAME + " (account_name, account_balance, account_monthly_budget, account_date, account_extra_date)"
 				+ " VALUES ('" + ACC_NAME + "', '" + ACC_BALANCE + "', '" + ACC_MONTHLY_BUDGET + "', '" + m_date.getTimeInMillis() + "', datetime());");
 	}
-	
-    
-    /*
-     * FUNCTION: public void connectToDb()
-     * 
-     * DESCRIPTION: Attempts to create the database from a sample located in the assets directory
-     * 				if a database is not present.
-     * 				If a database exists for this given emulator, it opens a connection with the DB.
-     * 
-     * 		INPUTS: (none)
-     * 		OUTPUTS: SQLiteDatabase object
-     * 
-     * 
-     */
-    public SQLiteDatabase connectToDb() {
-    	
-    	FinancoidOpenDb dbHelper = new FinancoidOpenDb(this);
-    	try {
-    		 
-	        	dbHelper.createDataBase();
-	 
-	 	} catch (IOException ioe) {
-	 
-	 		throw new Error("Unable to create database");
-	 
-	 	}
-	 
-	 	try {
-	 
-	 		dbConn = dbHelper.openDataBase();
-	 
-	 	}catch(SQLException sqle){
-	 
-	 		throw sqle;
-	 
-	 	}
-	 	
-	 	return dbConn;
-
-
-    }//end of function connectToDb()
-    
-    
 
 }

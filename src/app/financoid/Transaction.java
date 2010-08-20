@@ -15,10 +15,18 @@ import android.net.Uri;
 public class Transaction {
 	
 	private long m_id;
+	
+	@SuppressWarnings("unused")
 	private String m_title;
+	
+	@SuppressWarnings("unused")
 	private String m_category;
 	private double m_value;
+	
+	@SuppressWarnings("unused")
 	private String m_date;
+	
+	@SuppressWarnings("unused")
 	private double m_amount;
 	
 	public static final String TITLE = "transaction_name"; // price per unit volume

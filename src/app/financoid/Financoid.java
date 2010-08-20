@@ -12,7 +12,7 @@ import android.widget.TabHost;
 import android.app.TabActivity;
 
 public class Financoid extends TabActivity {
-
+	
 	/*
 	 * FUNCTION: public void onCreate(Bundle savedInstanceState)
 	 * 

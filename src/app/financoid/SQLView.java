@@ -64,6 +64,7 @@ public class SQLView extends ExportView {
 				HashMap<String, String> categoriesProjection = getCategoriesProjection();
 
 				Set<String> keySet = transactionsProjection.keySet();
+				@SuppressWarnings("unused")
 				String[] proj = keySet.toArray(new String[keySet.size()]);
 				SQLiteDatabase db = SQLiteDatabase.openDatabase("/data/data/app.financoid/databases/financoiddb", null, SQLiteDatabase.OPEN_READONLY);
 				Cursor c = db.query(TABLE_NAME, new String[] {KEY_ID, KEY_TITLE, KEY_VALUE, KEY_PREFIX, KEY_CATEGORY, KEY_DATE}, null, null, null, null, null);

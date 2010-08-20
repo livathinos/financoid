@@ -40,7 +40,8 @@
        			  android:theme="@android:style/Theme.NoTitleBar"></activity>
        	<activity android:name="AccountActivity"
        			  android:theme="@android:style/Theme.NoTitleBar"></activity>
-        <!--<activity android:name="InviteActivity"></activity>-->
+        <activity android:name="TransactionManager"
+        		  android:theme="@android:style/Theme.NoTitleBar"></activity>
 
     </application>
 

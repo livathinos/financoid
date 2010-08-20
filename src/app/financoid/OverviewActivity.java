@@ -8,6 +8,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
@@ -16,6 +17,8 @@ import android.text.Spannable;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.SimpleCursorAdapter;
@@ -37,7 +40,7 @@ public class OverviewActivity extends Activity {
 	public static final String KEY_ACC_MONTHLY = "account_monthly_budget";
 	public static final String KEY_ACC_DATE = "account_date";
 	public static final String KEY_ACC_EXTRA_DATE = "account_extra_date";
-	private static final int VISIBLE = 0;
+	protected static final String TAG = null;
 	
 	private SQLiteDatabase dbConn;
 	private Cursor balanceCursor;
@@ -64,7 +67,7 @@ public class OverviewActivity extends Activity {
 	
 	private DateFormat f_dateFormatter = null;
 	//private Calendar m_date = GregorianCalendar.getInstance();
-	
+
 	private int COL_TITLE = 1;
 	private int COL_VALUE = 2;
 	private int COL_CATEGORY = 4;
@@ -84,6 +87,8 @@ public class OverviewActivity extends Activity {
 	
 	private String TABLE_ACCOUNTS = "accounts";
 	private String TABLE_TRANSACTIONS = "transactions";
+	
+	public int ID_TAG = 0;
 	
 	
 	/*
@@ -123,12 +128,12 @@ public class OverviewActivity extends Activity {
         abProgress = (ProgressBar) findViewById(R.id.abProgressBar);
         mbProgress = (ProgressBar) findViewById(R.id.mbProgressBar);
         
+        /*
+         * Need to set the progress bar drawables in onCreate, otherwise they will be reinitialized
+         * and disappear from plain view.
+         */
         abProgress.setProgressDrawable(getResources().getDrawable(R.drawable.ab_progress_layout));
         mbProgress.setProgressDrawable(getResources().getDrawable(R.drawable.mb_progress_layout));
-        
-        //populateBalanceFields();
-        
-        //populateRecentTransactionList();
         
     }
     
@@ -276,13 +281,39 @@ public class OverviewActivity extends Activity {
         balanceCursor = getBalanceList();
         this.startManagingCursor(this.balanceCursor);
         
-        SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, R.layout.balance_row, balanceCursor,
+        final SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, R.layout.balance_row, balanceCursor,
                 new String[] {"transaction_title", "transaction_value", "transaction_category", "transaction_date"}, new int[] { R.id.TRANS_TITLE, R.id.TRANS_VALUE, R.id.TRANS_CATEGORY, R.id.TRANS_DATE});
         
         adapter.setViewBinder(m_viewBinder);
         
         ovListView.setAdapter(adapter);
-        
+        ovListView.setItemsCanFocus(true);
+        ovListView.setOnItemClickListener(new OnItemClickListener(){
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				/*
+				AlertDialog alertDialog = new AlertDialog.Builder(OverviewActivity.this).create();
+				alertDialog.setTitle("Debug");	     
+	            
+	            alertDialog.setMessage("Transaction ID: " + adapter.getItemId(arg2));
+	            alertDialog.show();
+	            */
+	            Intent intent = new Intent(OverviewActivity.this, TransactionManager.class);
+	            
+	            /*
+	             * Put the extra information we need (the row id of the item selected)
+	             * into the extra field of the intent.
+	             */
+	            intent.putExtra("TransactionId", adapter.getItemId(arg2));
+	            
+	            startActivity(intent);
+				
+			}
+
+	      });
+
         //balanceCursor.close();
     	
     }
@@ -293,7 +324,6 @@ public class OverviewActivity extends Activity {
         return dbConn.query(true, TABLE_TRANSACTIONS, new String[] { KEY_ROWID, KEY_TITLE, KEY_VALUE, KEY_PREFIX, KEY_CATEGORY, KEY_DATE}, null, null, null, null, KEY_EXTRA_DATE+" DESC", limitBy);
     }
 	
-    
     
     /*
      * CONSTRUCTOR: private SimpleCursorAdapter
@@ -306,13 +336,16 @@ public class OverviewActivity extends Activity {
      * 
      */
     private SimpleCursorAdapter.ViewBinder m_viewBinder = new SimpleCursorAdapter.ViewBinder() {
+
 		public boolean setViewValue(View view, Cursor cursor, int columnIndex) {
 			
 			String text = null;
+			
 			TextView textview = (TextView) view;
 			if (textview == null) {
 				return false;
 			}
+			
 			if (columnIndex == COL_TITLE) {
 				String title = cursor.getString(columnIndex);
 				text = title;
@@ -331,8 +364,10 @@ public class OverviewActivity extends Activity {
 				text = category;
 			}
 			textview.setText(text);
+			
 			return true;
 		}
+
 	};
 	
 	public double getAccountBalance(Cursor cur) {
