@@ -44,7 +44,7 @@ public class Financoid extends TabActivity {
         		.setIndicator("Overview",getResources().getDrawable(R.drawable.notes))
         		.setContent(new Intent(this, OverviewActivity.class)));
         tabHost.addTab(tabHost.newTabSpec("tab2")
-                .setIndicator("Today", getResources().getDrawable(R.drawable.tasks))
+                .setIndicator("Transactions", getResources().getDrawable(R.drawable.tasks))
         		.setContent(new Intent(this, LatestActivity.class)));
         tabHost.addTab(tabHost.newTabSpec("tab3")
         		.setIndicator("Statistics", getResources().getDrawable(R.drawable.calculator))

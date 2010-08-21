@@ -1,18 +1,19 @@
 package app.financoid;
 
-import java.io.IOException;
 import java.text.DateFormat;
 import java.util.Date;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.database.Cursor;
-import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
+import android.widget.AdapterView.OnItemClickListener;
 
 public class LatestActivity extends Activity {
 	
@@ -63,12 +64,39 @@ public class LatestActivity extends Activity {
         balanceCursor = getLatestList();
         this.startManagingCursor(this.balanceCursor);
         
-        SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, R.layout.balance_row, balanceCursor,
+        final SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, R.layout.balance_row, balanceCursor,
                 new String[] {"transaction_title", "transaction_value", "transaction_category", "transaction_date"}, new int[] { R.id.TRANS_TITLE, R.id.TRANS_VALUE, R.id.TRANS_CATEGORY, R.id.TRANS_DATE});
         
         adapter.setViewBinder(m_viewBinder);
         
         ovListView.setAdapter(adapter);
+        
+        ovListView.setItemsCanFocus(true);
+        ovListView.setOnItemClickListener(new OnItemClickListener(){
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				/*
+				AlertDialog alertDialog = new AlertDialog.Builder(OverviewActivity.this).create();
+				alertDialog.setTitle("Debug");	     
+	            
+	            alertDialog.setMessage("Transaction ID: " + adapter.getItemId(arg2));
+	            alertDialog.show();
+	            */
+	            Intent intent = new Intent(LatestActivity.this, TransactionManager.class);
+	            
+	            /*
+	             * Put the extra information we need (the row id of the item selected)
+	             * into the extra field of the intent.
+	             */
+	            intent.putExtra("TransactionId", adapter.getItemId(arg2));
+	            
+	            startActivity(intent);
+				
+			}
+
+	      });
 
         /*
          * TODO: Implement callback function to close the database connection once

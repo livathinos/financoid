@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_white">
     <TableLayout android:layout_width="match_parent"
                  android:layout_height="match_parent">
         <TableRow>
             <TextView android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
-                      android:text="@string/transactionCategoryLabel"/>
+                      android:text="@string/transactionCategoryLabel"
+                      android:textColor="#2E3235"/>
         </TableRow>
         <TableRow>
             <Spinner android:layout_height="wrap_content"
@@ -18,7 +20,8 @@
         <TableRow>
             <TextView android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
-                      android:text="@string/transactionNameLabel"/>
+                      android:text="@string/transactionNameLabel"
+                      android:textColor="#2E3235"/>
         </TableRow>
         <TableRow>
             <EditText android:id="@+id/transactionNameEditText"
@@ -29,7 +32,8 @@
         <TableRow>
             <TextView android:text="@string/transactionAmountLabel"
                       android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"/>
+                      android:layout_height="wrap_content"
+                      android:textColor="#2E3235"/>
         </TableRow>
         <TableRow>
             <EditText android:id="@+id/transactionAmountText"
