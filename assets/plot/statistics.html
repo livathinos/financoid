@@ -7,7 +7,21 @@
     <!--[if IE]><script language="javascript" type="text/javascript" src="../excanvas.min.js"></script><![endif]-->
     <script language="javascript" type="text/javascript" src="jquery.min.js"></script>
     <script language="javascript" type="text/javascript" src="jquery.flot.min.js"></script>
+    <script language="javascript" type="text/javascript" src="jquery.flot.pie.js"></script>
+    
 	<script id="source" language="javascript" type="text/javascript">
+
+	var data = [];
+	var series = Math.floor(Math.random()*10)+3;
+	//for( var i = 0; i<series; i++)
+	//{
+		data[0] = { label: "Entertainment", data: Math.floor(Math.random()*100)+3 };
+		data[1] = { label: "Books", data: Math.floor(Math.random()*100)+3 };
+		data[2] = { label: "Everyday purchases", data: Math.floor(Math.random()*100)+3 };
+		data[3] = { label: "Clothes", data: Math.floor(Math.random()*100)+3 };
+		data[4] = { label: "Other", data: Math.floor(Math.random()*100)+3 };
+		data[5] = { label: "Money left", data: Math.floor(Math.random()*100)+3 };
+	//}
 	
 	function load(){
 		//document.getElementById('graphtitle').innerHTML = window.graphdata.getGraphTitle("wassup", 5);
@@ -17,14 +31,71 @@
 	
 	function GotGraph(gdata) {
 		$.plot($("#placeholder"), gdata);
+		$.plot($("#graph9"), data,
+				{
+				        series: {
+				            pie: {
+				                show: true,
+				                radius: 1,
+				                tilt: 0.5,
+				                label: {
+				                    show: true,
+				                    radius: 1,
+				                    formatter: function(label, series){
+				                        return '<div class="label" style="font-size:8pt;text-align:center;padding:2px;color:white;">'+label+'<br/>'+Math.round(series.percent)+'%</div>';
+				                    },
+				                    background: { opacity: 0.8 }
+				                },
+				                combine: {
+				                    color: '#999',
+				                    threshold: 0.1
+				                }
+				            }
+				        },
+				        legend: {
+				            show: false
+				        }
+				});
 	
 	}
+
+	
 	</script>
-    
+    <style>
+    body {
+	  font-family: sans-serif;
+	  font-size: 14px;
+	  margin: 0;
+	  padding: 0;
+	}
+	h1 {
+	}
+	#placeholder {
+		width: 305px;
+		height: 200px;
+		margin: 0;
+	  	padding: 0;
+	}
+	
+	#graph9 {
+		width:305px;
+		height: 320px;
+		margin: 0;
+	  	padding: 0;
+	  	position: absolute;
+	  	top: 120px;
+	  	left: 10px;
+	}
+	.label {
+		height: 20px;
+		margin: 0;
+		padding: 0;
+	}
+    </style>
  </head>
  
  <body onload="load()">
-
+    <div id="graph9" class="graph"></div>
     <div id="placeholder"></div>   
 
  </body>

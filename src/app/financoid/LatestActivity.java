@@ -120,10 +120,10 @@ public class LatestActivity extends Activity {
     
 	public Cursor getLatestList() {
 		String tableName = "transactions";
-		String dateQuery = "(strftime('%d') == strftime('%d',transaction_extra_date))";
+		//String dateQuery = "(strftime('%d') == strftime('%d',transaction_extra_date))";
 		
 		return dbConn.query(tableName, new String[] { KEY_ROWID, KEY_TITLE, KEY_VALUE, KEY_PREFIX, KEY_CATEGORY, KEY_EXTRA_DATE, KEY_DATE},
-        		dateQuery, 
+        		null,//dateQuery, 
         		null, null, null, KEY_EXTRA_DATE + " DESC");
     }
     

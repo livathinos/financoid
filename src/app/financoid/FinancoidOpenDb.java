@@ -3,6 +3,8 @@ package app.financoid;
 import java.io.*;
 import java.util.ArrayList;
 
+import org.json.JSONArray;
+
 import android.content.Context;
 import android.database.SQLException;
 import android.database.Cursor;
@@ -205,6 +207,30 @@ public class FinancoidOpenDb extends SQLiteOpenHelper{
 
 
 	    }//end of function connectToDb()
+	    
+	    
+	    /*
+	     * Builds this month's statistics returning an array of values that is
+	     * used with the JSON object in the StatisticsActivity view.
+	     * 
+	     */
+	    public static JSONArray buildThisMonthsStats() {
+			
+	    	return null;
+	    	
+	    }
+	    
+	    public static JSONArray buildMixedMonthStats() {
+	    	
+	    	return null;
+	    	
+	    }
+	    
+	    public static JSONArray buildCurrentBalanceStats() {
+			
+	    	return null;
+	    	
+	    }
 	}
 
 

@@ -58,24 +58,26 @@ public class LineData {
 		} catch (Exception ex) {
 			//
 		}
-		Log.d("Time after data input:", " " + SystemClock.uptimeMillis());
+		
 		String ret = "var data = " + arr.toString() + ";";
 		Log.d("graphdebug", ret);
 		mAppView.loadUrl("javascript:GotGraph(" + arr.toString() + ")");
+		
+		Log.d("Time after data input:", " " + SystemClock.uptimeMillis());
 
 	}
 	
 	private JSONArray getRawDataJSON() {
 		Random rand = new Random();
 		JSONArray arr = new JSONArray();
-		int priorval = rand.nextInt(50);
-		for (int i = 0; i < 50; i++) {
+		int priorval = rand.nextInt(20);
+		for (int i = 0; i < 20; i++) {
 			JSONArray elem = new JSONArray();
 			elem.put(i);
 			if(rand.nextBoolean()) {
-				priorval += rand.nextInt(20);
+				priorval += rand.nextInt(10);
 			} else {
-				priorval -= rand.nextInt(20);
+				priorval -= rand.nextInt(10);
 			}
 			elem.put(priorval);
 			arr.put(elem);

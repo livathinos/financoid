@@ -60,4 +60,5 @@ public class StatisticsActivity extends Activity {
             return true;
         }
     }
+    
 }

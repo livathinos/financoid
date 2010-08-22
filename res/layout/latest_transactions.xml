@@ -13,7 +13,7 @@
 		android:id="@+id/widget32"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:text="Today's transactions"
+		android:text="History"
 		android:textColor="#2E3235"
 		android:textSize="20dp"
 		android:textStyle="bold"
