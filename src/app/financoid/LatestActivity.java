@@ -10,6 +10,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
@@ -27,6 +28,9 @@ public class LatestActivity extends Activity {
 	
 	private SQLiteDatabase dbConn;
 	private Cursor balanceCursor;
+	
+	private Button mTodaysListButton;
+	private Button mAllListButton;
 	
 	private PreferenceFactory f_prefs;
 	private ListView ovListView;
@@ -60,16 +64,43 @@ public class LatestActivity extends Activity {
         setDefaultKeyMode(DEFAULT_KEYS_SHORTCUT);
         
         ovListView = (ListView) findViewById(android.R.id.list);
+        mTodaysListButton = (Button) findViewById(R.id.buttonToday);
+        mAllListButton = (Button) findViewById(R.id.buttonAll);
+        
+        
 
-        balanceCursor = getLatestList();
+        /*
+         * TODO: Implement callback function to close the database connection once
+         * 		 the activity is closed.
+         */
+        
+    }
+    
+    public void onResume() {
+    	
+    	mTodaysListButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                onTodayButtonClicked();
+            }
+        });
+        
+        mAllListButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                onAllButtonClicked();
+            }
+        });
+        
+
+    	balanceCursor = getAllList();
         this.startManagingCursor(this.balanceCursor);
         
         final SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, R.layout.balance_row, balanceCursor,
                 new String[] {"transaction_title", "transaction_value", "transaction_category", "transaction_date"}, new int[] { R.id.TRANS_TITLE, R.id.TRANS_VALUE, R.id.TRANS_CATEGORY, R.id.TRANS_DATE});
         
         adapter.setViewBinder(m_viewBinder);
+        adapter.notifyDataSetChanged();
         
-        ovListView.setAdapter(adapter);
+        ovListView.setAdapter(adapter);        
         
         ovListView.setItemsCanFocus(true);
         ovListView.setOnItemClickListener(new OnItemClickListener(){
@@ -97,12 +128,9 @@ public class LatestActivity extends Activity {
 			}
 
 	      });
-
-        /*
-         * TODO: Implement callback function to close the database connection once
-         * 		 the activity is closed.
-         */
+    	
         
+        super.onResume();
     }
     
     /*
@@ -114,11 +142,44 @@ public class LatestActivity extends Activity {
      * 		OUTPUTS: (none)
      * 
      */
-    public void displayMostFrequent() {
+    public void onTodayButtonClicked() {
+    	balanceCursor = getTodaysList();
     	
+    	this.startManagingCursor(this.balanceCursor);
+        
+        final SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, R.layout.balance_row, balanceCursor,
+                new String[] {"transaction_title", "transaction_value", "transaction_category", "transaction_date"}, new int[] { R.id.TRANS_TITLE, R.id.TRANS_VALUE, R.id.TRANS_CATEGORY, R.id.TRANS_DATE});
+        
+        adapter.setViewBinder(m_viewBinder);
+        adapter.notifyDataSetChanged();
+        
+        ovListView.setAdapter(adapter);        
     }
     
-	public Cursor getLatestList() {
+    public void onAllButtonClicked() {
+    	balanceCursor = getAllList();
+    	
+    	this.startManagingCursor(this.balanceCursor);
+        
+        final SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, R.layout.balance_row, balanceCursor,
+                new String[] {"transaction_title", "transaction_value", "transaction_category", "transaction_date"}, new int[] { R.id.TRANS_TITLE, R.id.TRANS_VALUE, R.id.TRANS_CATEGORY, R.id.TRANS_DATE});
+        
+        adapter.setViewBinder(m_viewBinder);
+        adapter.notifyDataSetChanged();
+        
+        ovListView.setAdapter(adapter);        
+    }
+    
+	public Cursor getTodaysList() {
+		String tableName = "transactions";
+		String dateQuery = "(strftime('%d') == strftime('%d',transaction_extra_date))";
+		
+		return dbConn.query(tableName, new String[] { KEY_ROWID, KEY_TITLE, KEY_VALUE, KEY_PREFIX, KEY_CATEGORY, KEY_EXTRA_DATE, KEY_DATE},
+        		dateQuery, 
+        		null, null, null, KEY_EXTRA_DATE + " DESC");
+    }
+	
+	public Cursor getAllList() {
 		String tableName = "transactions";
 		//String dateQuery = "(strftime('%d') == strftime('%d',transaction_extra_date))";
 		

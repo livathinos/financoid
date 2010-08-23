@@ -18,9 +18,23 @@ public class FinancoidOpenDb extends SQLiteOpenHelper{
 	 
 	    private static String DB_NAME = "financoiddb";
 	 
-	    private SQLiteDatabase myDataBase; 
+	    private static SQLiteDatabase dbConn; 
 	 
 	    private final Context myContext;
+	    
+	    private static final String TABLE_TRANSACTIONS = null;
+	    private static final String TABLE_ACCOUNTS = null;
+	    
+	    private static final String TABLE_TRANSACTIONS_ID = "_id";
+	    private static final String TABLE_TRANSACTIONS_TITLE = "transaction_title";
+	    private static final String TABLE_TRANSACTIONS_VALUE = "transaction_value";
+	    private static final String TABLE_TRANSACTIONS_CATEGORY = "transaction_category";
+	    private static final String TABLE_TRANSACTIONS_DATE = "transactions_date";
+	    
+	    private static final String TABLE_ACCOUNTS_ID = "_id";
+	    private static final String TABLE_ACCOUNTS_TITLE = "account_name";
+	    private static final String TABLE_ACCOUNTS_BALANCE = "account_balance";
+	    private static final String TABLE_ACCOUNTS_BUDGET = "account_monthly_budget";
 	 
 	    /**
 	     * Constructor
@@ -127,12 +141,12 @@ public class FinancoidOpenDb extends SQLiteOpenHelper{
 			}
 			//contentValues.put(KEY_TIMESTAMP, timeStamp);
 	    	
-			return myDataBase.insert(dbTable, null, contentValues);
+			return dbConn.insert(dbTable, null, contentValues);
 		}
 	    
 	    public Cursor getAllEntries(String dbTable, String[] columns, String selection, String[] selectionArgs,
 				String groupBy, String having, String sortBy, String sortOption) {
-			return myDataBase.query(dbTable, columns, selection, selectionArgs, groupBy,
+			return dbConn.query(dbTable, columns, selection, selectionArgs, groupBy,
 					having, sortBy + " " + sortOption);
 		}
 
@@ -142,17 +156,17 @@ public class FinancoidOpenDb extends SQLiteOpenHelper{
 	 
 	    	//Open the database
 	        String myPath = DB_PATH + DB_NAME;
-	    	myDataBase = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
+	    	dbConn = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
 	    	
-	    	return myDataBase;
+	    	return dbConn;
 	 
 	    }
 	 
 	    @Override
 		public synchronized void close() {
 	 
-	    	    if(myDataBase != null)
-	    		    myDataBase.close();
+	    	    if(dbConn != null)
+	    		    dbConn.close();
 	 
 	    	    super.close();
 	 
@@ -226,8 +240,22 @@ public class FinancoidOpenDb extends SQLiteOpenHelper{
 	    	
 	    }
 	    
+	    /*
+	     * FUNCTION: public static JSONArray buildCurrentBalanceStats()
+	     * 
+	     * DESCRIPTION: Fetches current balance data from the database and returns it
+	     * 				in a JSONArray form to be fed into the flot library for display
+	     * 				in the pie chart.
+	     * 
+	     * 		INPUTS: (none)
+	     * 		OUTPUTS: JSONArray
+	     * 
+	     */
 	    public static JSONArray buildCurrentBalanceStats() {
+			Cursor cur;
 			
+	    	cur = dbConn.query(TABLE_ACCOUNTS, new String[] { "account_name", "account_balance", "account_monthly_budget", "account_date", "account_extra_date" }, null, null, null, null,null);
+	    	
 	    	return null;
 	    	
 	    }

@@ -30,6 +30,12 @@ public class AccountActivity extends Activity {
 	private EditText mMonthlyBudgetEditText;
 	private Button mAccountSaveButton;
 	private SQLiteDatabase dbConn;
+	private Cursor fetchAccountCur;
+
+	private int fetchedAccountId;
+	private String fetchedAccountName;
+	private double fetchedAccountBalance;
+	private double fetchedMonthlyBudget;
 	
 	private final static String TAG = "Account management";
 	private final static String TABLE_NAME = "accounts";
@@ -41,6 +47,8 @@ public class AccountActivity extends Activity {
 	private final static String KEY_TITLE = "account_name";
 	private final static String KEY_BALANCE = "account_balance";
 	private final static String KEY_MONTHLY_BUDGET = "account_monthly_budget";
+	
+	private final static int account_tag_id = 1;
 	
 	private Calendar m_date = GregorianCalendar.getInstance();
 	
@@ -62,8 +70,6 @@ public class AccountActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.account_management);
         
-        dbConn = FinancoidOpenDb.connectToDb(this, dbConn);
-        
         // Obtain handles to UI objects
         mAccountNameEditText = (EditText) findViewById(R.id.accountNameEditText);
         mAccountBalanceEditText = (EditText) findViewById(R.id.accountBalanceEditText);
@@ -76,9 +82,50 @@ public class AccountActivity extends Activity {
             }
         });
     }
+    
+    public void onResume() {
+    	
+    	dbConn = FinancoidOpenDb.connectToDb(this, dbConn);
+    	fetchAccountCur = fetchAccountInfo();
+        
+        displayAccountInfo(fetchAccountCur);
+    	
+    	super.onResume();
+    	
+    }
+    
+    public Cursor fetchAccountInfo() {
+		
+    	return dbConn.query(TABLE_NAME, new String [] {KEY_ROWID, KEY_TITLE, KEY_BALANCE, KEY_MONTHLY_BUDGET} , KEY_ROWID + "=" + account_tag_id, null, null, null, null );
+    	
+    }
+    
+    public void displayAccountInfo(Cursor cur) {
+    	
+    	if (cur.moveToFirst()) {
+			
+			fetchedAccountName = cur.getString(cur.getColumnIndex(KEY_TITLE));
+			fetchedAccountBalance = cur.getDouble(cur.getColumnIndex(KEY_BALANCE));
+			fetchedMonthlyBudget = cur.getDouble(cur.getColumnIndex(KEY_MONTHLY_BUDGET));
+			fetchedAccountId = cur.getInt(cur.getColumnIndex(KEY_ROWID));
+			
+		}
+		
+		cur.close();
+		
+		if (fetchedAccountName != null)
+			mAccountNameEditText.setText(fetchedAccountName);
+		
+		if (fetchedAccountBalance != 0)
+			mAccountBalanceEditText.setText("" + fetchedAccountBalance);
+		
+		if (fetchedMonthlyBudget != 0)
+			mMonthlyBudgetEditText.setText("" + fetchedMonthlyBudget);
+    	
+    }
 
 	/*
-	 * FUNCTIN: public Cursor getAllCategories()
+	 * FUNCTION: public Cursor getAllCategories()
 	 * 
 	 * DESCRIPTION: Returns all categories inside the database tables 'categories'
 	 * 
