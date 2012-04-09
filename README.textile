@@ -2,10 +2,8 @@ h1. Financoid
 
 h2. Info
 
-This application provides the user with tools for keeping track of her everyday expenses,
-while at the same time provides statistical and data visualiztion tools for monthly
-expenditures and expense patterns through time (eg. which month or product category
-seems to be most expense-heavy).
+Financoid helps the user keep track of her everyday expenses by recording monetary transactions, while built-in statistical and data visualiztion tools provide an overview of monthly 
+expenditures and expense patterns through time (eg. which month or product category seems to be the most costly).
 
 h2. Features
 
